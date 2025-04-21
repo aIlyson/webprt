@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import styles from "./Banner.module.css";
 import {
   GithubIcon,
@@ -147,13 +147,13 @@ const Banner = () => {
           <MotionDiv className={styles.imageColumn} variants={imageVariants}>
             <div className={styles.imageWrapper}>
               <div className={styles.imageContainer}>
-                <img
+                <Image
                   src="/person.jpeg"
                   alt="Alysson Michel"
                   className={styles.profileImage}
-                  onError={(
-                    e: React.SyntheticEvent<HTMLImageElement, Event>
-                  ) => {
+                  width={200}
+                  height={200}
+                  onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
                     target.src =

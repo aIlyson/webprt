@@ -17,7 +17,43 @@ const Contact: React.FC = () => {
   const [error, setError] = useState("");
 
   const BLACKLIST = [
-    "http://", "https://", "www.", ".com", ".xyz", ".ga", ".cf", "promoção", "promo", "grátis", "gratuito", "ganhe", "clique aqui", "oferta", "imperdível", "viagra", "cialis", "criptomoeda","bitcoin", "btc", "eth", "ethereum", "apostas", "cassino", "jogos de azar", "sexo", "pornô", "porno", "porn", "xxx", "gay", "erótico", "fique rico", "dinheiro fácil", "trabalhe de casa", "lucro garantido",];
+    "http://",
+    "https://",
+    "www.",
+    ".com",
+    ".xyz",
+    ".ga",
+    ".cf",
+    "promoção",
+    "promo",
+    "grátis",
+    "gratuito",
+    "ganhe",
+    "clique aqui",
+    "oferta",
+    "imperdível",
+    "viagra",
+    "cialis",
+    "criptomoeda",
+    "bitcoin",
+    "btc",
+    "eth",
+    "ethereum",
+    "apostas",
+    "cassino",
+    "jogos de azar",
+    "sexo",
+    "pornô",
+    "porno",
+    "porn",
+    "xxx",
+    "gay",
+    "erótico",
+    "fique rico",
+    "dinheiro fácil",
+    "trabalhe de casa",
+    "lucro garantido",
+  ];
 
   const containsSpam = (text: string) => {
     const lowerText = text.toLowerCase();
@@ -141,21 +177,24 @@ const Contact: React.FC = () => {
               <div className={styles.codeContent}>
                 <p className={styles.codeLine}>
                   <span className={styles.codeComment}>
-                    // Entre em contato comigo
+                    {"// Entre em contato comigo"}
                   </span>
                 </p>
                 <p className={styles.codeLine}>
                   <span className={styles.codeConst}>const</span>{" "}
                   <span className={styles.codeVar}>email</span> ={" "}
                   <span className={styles.codeString}>
-                    "alysson.michel@outlook.com"
+                    {'"alyssonmichel20@gmail.com"'}
                   </span>
                   ;
                 </p>
                 <p className={styles.codeLine}>
                   <span className={styles.codeConst}>const</span>{" "}
                   <span className={styles.codeVar}>local</span> ={" "}
-                  <span className={styles.codeString}>"Pernambucano, BR"</span>;
+                  <span className={styles.codeString}>
+                    {'"Pernambucano, BR"'}
+                  </span>
+                  ;
                 </p>
                 <p className={styles.codeLine}>
                   <span className={styles.codeConst}>const</span>{" "}
@@ -165,7 +204,7 @@ const Contact: React.FC = () => {
                 <br />
                 <p className={styles.codeLine}>
                   <span className={styles.codeComment}>
-                    // Envie sua mensagem
+                    {"// Envie sua mensagem"}
                   </span>
                 </p>
                 <p className={styles.codeLine}>
@@ -175,7 +214,7 @@ const Contact: React.FC = () => {
                 <p className={styles.codeLine}>
                   {" "}
                   <span className={styles.codeReturn}>return</span>{" "}
-                  <span className={styles.codeString}>"Opa, amigo!"</span>;
+                  <span className={styles.codeString}>{'"Opa, amigo!"'}</span>;
                 </p>
                 <p className={styles.codeLine}>{"}"}</p>
               </div>

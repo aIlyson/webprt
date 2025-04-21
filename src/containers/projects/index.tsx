@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { Section, Title } from "../../common/components/index";
 import { motion } from "framer-motion";
