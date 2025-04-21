@@ -1,0 +1,125 @@
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  line-height: 1.2;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.leftAlign {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.centerAlign {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.rightAlign {
+  text-align: right;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.h1 {
+  font-size: 3rem;
+}
+
+.h2 {
+  font-size: 2.5rem;
+}
+
+.h3 {
+  font-size: 2rem;
+}
+
+.h4 {
+  font-size: 1.5rem;
+}
+
+.h5 {
+  font-size: 1.25rem;
+}
+
+.h6 {
+  font-size: 1rem;
+}
+
+.baseColor {
+  color: var(--text-base);
+}
+
+.mutedColor {
+  color: var(--text-muted);
+}
+
+.primaryColor {
+  color: var(--primary);
+}
+
+.secondaryColor {
+  color: var(--secondary);
+}
+
+.accentColor {
+  color: var(--accent);
+}
+
+.underline {
+  height: 3px;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.underlineBase {
+  background-color: var(--text-base);
+}
+
+.underlineMuted {
+  background-color: var(--text-muted);
+}
+
+.underlinePrimary {
+  background-color: var(--primary);
+}
+
+.underlineSecondary {
+  background-color: var(--secondary);
+}
+
+.underlineAccent {
+  background-color: var(--accent);
+}
+
+.bracket {
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+  .h1 {
+    font-size: 2.5rem;
+  }
+
+  .h2 {
+    font-size: 2rem;
+  }
+
+  .h3 {
+    font-size: 1.75rem;
+  }
+
+  .bracket {
+    font-size: 1em;
+  }
+}

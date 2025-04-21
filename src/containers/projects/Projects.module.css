@@ -1,0 +1,330 @@
+/* Projects.module.css */
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--primary-light);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.projectCard {
+  background: var(--base);
+  border-radius: 0.625rem;
+  overflow: hidden;
+  border: 1px solid var(--primary-light);
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.projectCard:hover {
+  transform: translateY(-0.3125rem);
+}
+
+.imageWrapper {
+  position: relative;
+  height: 10rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imageWrapper:hover .imageOverlay {
+  opacity: 1;
+}
+
+.imageWrapper:hover .projectImage {
+  transform: scale(1.05);
+}
+
+.zoomIcon {
+  font-size: 2rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.cardContent {
+  padding: 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.projectTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-base);
+  margin: 0;
+}
+
+.projectYear {
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.projectDescription {
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  flex: 1;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.projectTag {
+  background: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary);
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.projectLinks {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.projectLink {
+  padding: 0.4rem 0.8rem;
+  background: rgba(var(--primary-rgb), 0.1);
+  border-radius: 0.25rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.projectLink:hover {
+  background: rgba(var(--primary-rgb), 0.2);
+}
+
+.privateLink {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.imageModalContent {
+  background: var(--base);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: var(--primary);
+}
+
+.modalImageContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-height: 80vh;
+}
+
+.modalImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 0.25rem;
+}
+
+.imageModalFooter {
+  padding: 1rem 0 0;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.imageModalFooter h3 {
+  color: var(--text-base);
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* Swiper styles */
+.swiperWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.swiperContainer {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.swiperPagination {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.bullet {
+  background: rgba(255, 255, 255, 0.4);
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bulletActive {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    gap: 1rem;
+  }
+
+  .swiperWrapper {
+    padding-bottom: 30px;
+  }
+
+  .bullet {
+    width: 8px;
+    height: 8px;
+  }
+
+  .imageModalContent {
+    padding: 0.5rem;
+  }
+
+  .closeButton {
+    top: -35px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .projectsGrid {
+    padding: 0 0.75rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .projectTitle {
+    font-size: 1.0625rem;
+  }
+
+  .imageModalFooter h3 {
+    font-size: 1.1rem;
+  }
+
+  .modalImageContainer {
+    max-height: 70vh;
+  }
+}

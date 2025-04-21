@@ -1,0 +1,14 @@
+.html {
+    scroll-behavior: smooth;
+  }
+  
+  .body {
+    background-color: #fff;
+    color: #1e1e1e;
+    font-smoothing: antialiased;
+  }
+  
+  .dark .body {
+    background-color: #1e1e1e;
+    color: #fff;
+  }

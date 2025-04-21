@@ -1,0 +1,140 @@
+.contactContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 1.5rem;
+}
+
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.codePanel {
+  background: var(--base-surface);
+  font-family: 'Fira Code', monospace;
+  border-radius: 8px;
+  border: 1px solid var(--primary-dark);
+  overflow: hidden;
+}
+
+.codeHeader {
+  background: var(--base);
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--primary-dark);
+}
+
+.codeDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.codeTitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-left: 10px;
+}
+
+.codeContent {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  padding: 1.5rem;
+}
+
+.codeLine {
+  margin: 0;
+}
+
+.codeComment {
+  color: var(--gray-600);
+}
+
+.codeConst {
+  color: var(--primary-light);
+}
+
+.codeVar {
+  color: var(--accent);
+}
+
+.codeString {
+  color: var(--secondary-light);
+}
+
+.codeBoolean {
+  color: var(--primary);
+}
+
+.codeFunction {
+  color: var(--accent-dark);
+}
+
+.codeReturn {
+  color: var(--primary-lighter);
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  color: var(--text-base);
+  font-weight: 500;
+}
+
+.formInput,
+.formTextarea {
+  background: var(--base-surface);
+  color: var(--text-base);
+  font-family: 'Inter', sans-serif;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-dark);
+  transition: all 0.3s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(217, 107, 91, 0.2);
+}
+
+.formTextarea {
+  resize: vertical;
+}
+
+.submitButton {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}

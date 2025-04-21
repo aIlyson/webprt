@@ -1,0 +1,142 @@
+:root {
+  --primary: #923331;
+  --primary-light: #a64744;
+  --primary-lighter: #b95b57;
+  --primary-dark: #6f2624;
+  --primary-darker: #4c1a19;
+
+  --secondary: #316092;
+  --secondary-light: #4a7ab2;
+  --secondary-dark: #24476b;
+
+  --accent: #d96b5b;
+  --accent-light: #e08a7e;
+  --accent-dark: #c04c3a;
+
+  --base: #1e1e1e;
+  --base-surface: #2b2b2b;
+
+  --earthy-50: #faf6f4;
+  --earthy-100: #f2e9e5;
+  --earthy-200: #e8d9d2;
+  --earthy-300: #d5beb3;
+  --earthy-400: #bf9c8c;
+  --earthy-500: #a87c6a;
+  --earthy-600: #8f6555;
+  --earthy-700: #6d4d40;
+  --earthy-800: #5a4036;
+  --earthy-900: #4b362e;
+
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  --text-base: #f5f5f5;
+  --text-muted: #cccccc;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+
+  --radius-md: 0.375rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&family=Press+Start+2P&display=swap');
+
+body {
+  background-color: var(--base);
+  color: var(--text-base);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 200ms, color 200ms;
+}
+
+a {
+  color: var(--accent);
+  transition: color 200ms;
+}
+
+a:hover {
+  color: var(--accent-light);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--text-base);
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-dark {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-terminal::after {
+  color: var(--accent);
+  content: "▋";
+  animation: blink 1s step-end infinite;
+  margin-left: var(--spacing-1);
+}
+
+.btn-terminal {
+  color: var(--accent);
+  font-family: 'Fira Code', monospace;
+  position: relative;
+  border: 2px solid var(--accent);
+}
+
+.btn-terminal::before {
+  content: '">"';
+  margin-right: var(--spacing-2);
+}
+
+.btn-terminal::after {
+  background: linear-gradient(90deg, rgba(217, 107, 91, 0.1) 0%, rgba(217, 107, 91, 0) 100%);
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+::-webkit-scrollbar {
+  width: var(--spacing-2);
+  height: var(--spacing-2);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(166, 71, 68, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-light);
+  border-radius: var(--radius-md);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: rgba(76, 26, 25, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--accent);
+}

@@ -1,0 +1,90 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--radius-md);
+  outline: none;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.buttonSm {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+.buttonMd {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.buttonLg {
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--earthy-100);
+}
+
+.primary:hover {
+  background-color: var(--primary-light);
+  box-shadow: 0 4px 12px rgba(146, 51, 49, 0.3);
+}
+
+.secondary {
+  background-color: var(--secondary);
+  color: var(--earthy-100);
+}
+
+.secondary:hover {
+  background-color: var(--secondary-light);
+  box-shadow: 0 4px 12px rgba(49, 96, 146, 0.3);
+}
+
+.terminal {
+  background-color: var(--base-surface);
+  color: var(--accent);
+  font-family: 'Fira Code', monospace;
+  border: 1px solid var(--accent);
+}
+
+.terminal:hover {
+  background-color: var(--accent-dark);
+  color: var(--earthy-100);
+  box-shadow: 0 4px 12px rgba(217, 107, 91, 0.3);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--text-base);
+  border: 1px solid var(--primary);
+}
+
+.outline:hover {
+  background-color: var(--primary);
+  color: var(--earthy-100);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-base);
+  border: 1px solid transparent;
+}
+
+.ghost:hover {
+  background-color: var(--base-surface);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}

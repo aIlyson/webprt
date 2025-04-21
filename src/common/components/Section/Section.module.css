@@ -1,0 +1,76 @@
+.section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 75rem;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fullWidth {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.baseBg {
+  background-color: var(--base);
+  color: var(--text-base);
+}
+
+.surfaceBg {
+  background-color: var(--base-surface);
+  color: var(--text-base);
+}
+
+.primaryBg {
+  background-color: var(--primary);
+  color: var(--earthy-100);
+}
+
+.secondaryBg {
+  background-color: var(--secondary);
+  color: var(--earthy-100);
+}
+
+.accentBg {
+  background-color: var(--accent);
+  color: var(--earthy-100);
+}
+
+.paddingNone {
+  padding: 0;
+}
+
+.paddingSm {
+  padding: 1.5rem 1rem;
+}
+
+.paddingMd {
+  padding: 3rem 1rem;
+}
+
+.paddingLg {
+  padding: 4.5rem 1rem;
+}
+
+@media (max-width: 48rem) {
+  .paddingMd {
+    padding: 2rem 1rem;
+  }
+  
+  .paddingLg {
+    padding: 3rem 1rem;
+  }
+
+  .fullWidth {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+}

@@ -1,0 +1,211 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 0;
+  background-color: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(146, 51, 49, 0.2);
+  transition: all 0.3s ease;
+}
+
+.nav.scrolled {
+  padding: 0.5rem 0;
+  background-color: rgba(30, 30, 30, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--primary-light));
+  transform-origin: 0%;
+  z-index: 1001;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
+  background-size: 100% 2px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Fira Code', monospace;
+  font-size: 1.2rem;
+  color: var(--text-base);
+  position: relative;
+}
+
+.logoAccent {
+  color: var(--accent);
+}
+
+.logoText {
+  margin: 0 0.3rem;
+  font-weight: 500;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1rem;
+  background-color: var(--accent);
+  margin-left: 2px;
+}
+
+.navItems {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLink {
+  position: relative;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.navLink:hover {
+  color: var(--text-base);
+}
+
+.navLink.active {
+  color: var(--accent);
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover .underline,
+.navLink.active .underline {
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeIcon {
+  font-size: 1.2rem;
+}
+
+.themeToggleBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.themeToggle:hover .themeToggleBorder {
+  opacity: 1;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.mobileMenuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.menuLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-base);
+  transition: all 0.3s ease;
+}
+
+.mobileMenuButton:hover .menuLine {
+  background-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .navItems {
+    display: none;
+  }
+  
+  .mobileMenu {
+    display: block;
+  }
+  
+  .navContainer {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1rem;
+  }
+  
+  .themeToggle {
+    padding: 0.3rem;
+  }
+  
+  .themeIcon {
+    font-size: 1rem;
+  }
+}
