@@ -1,12 +1,17 @@
+// src/components/NavBar/NavBar.tsx
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useAppContext } from "../../common/context/appContext";
 import styles from "./NavBar.module.css";
+import MoonIcon from "../../common/svg/MoonIcon";
+import SunIcon from "../../common/svg/SunIcon";
+import MenuIcon from "../../common/svg/MenuIcon";
 
 const NavBar: React.FC = () => {
   const { theme, toggleTheme } = useAppContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -17,6 +22,10 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+      
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
 
       const sections = document.querySelectorAll("section");
       sections.forEach((section) => {
@@ -33,7 +42,7 @@ const NavBar: React.FC = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   const navItems = [
     { name: "Início", href: "#home", id: "home" },
@@ -41,6 +50,10 @@ const NavBar: React.FC = () => {
     { name: "Projetos", href: "#projects", id: "projects" },
     { name: "Contato", href: "#contact", id: "contact" },
   ];
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <>
@@ -50,7 +63,9 @@ const NavBar: React.FC = () => {
       />
 
       <motion.nav
-        className={`${styles.nav} ${isScrolled ? styles.scrolled : ""}`}
+        className={`${styles.nav} ${isScrolled ? styles.scrolled : ""} ${
+          isMenuOpen ? styles.menuOpen : ""
+        }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -95,36 +110,107 @@ const NavBar: React.FC = () => {
           </div>
 
           <div className={styles.controls}>
-            <button
+            <motion.button
               onClick={toggleTheme}
               className={styles.themeToggle}
               aria-label="Alternar tema"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <motion.span
+              <motion.div
                 key={theme}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                transition={{ duration: 0.3 }}
                 className={styles.themeIcon}
               >
-                {theme === "light" ? "🌙" : "☀️"}
-              </motion.span>
+                {theme === "light" ? <MoonIcon /> : <SunIcon />}
+              </motion.div>
               <span className={styles.themeToggleBorder} />
-            </button>
+            </motion.button>
 
             <div className={styles.mobileMenu}>
-              <button
-                className={styles.mobileMenuButton}
-                aria-label="Menu mobile"
+              <motion.button
+                className={`${styles.mobileMenuButton} ${
+                  isMenuOpen ? styles.open : ""
+                }`}
+                aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+                onClick={toggleMenu}
+                whileTap={{ scale: 0.9 }}
               >
                 <span className={styles.menuIcon}>
-                  <span className={styles.menuLine} />
-                  <span className={styles.menuLine} />
-                  <span className={styles.menuLine} />
+                  <MenuIcon />
+                  {isMenuOpen && (
+                    <>
+                      <motion.span
+                        className={styles.menuLine}
+                        initial={{ opacity: 0 }}
+                        animate={{
+                          opacity: 1,
+                          y: 6,
+                          rotate: 45,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <motion.span
+                        className={styles.menuLine}
+                        animate={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <motion.span
+                        className={styles.menuLine}
+                        initial={{ opacity: 0 }}
+                        animate={{
+                          opacity: 1,
+                          y: -6,
+                          rotate: -45,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </>
+                  )}
                 </span>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
+
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className={styles.mobileNavContainer}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <div className={styles.mobileNavItems}>
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    className={`${styles.mobileNavLink} ${
+                      activeSection === item.id ? styles.active : ""
+                    }`}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -20, opacity: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.1 }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                    <motion.span
+                      className={styles.mobileUnderline}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: activeSection === item.id ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
     </>
   );
