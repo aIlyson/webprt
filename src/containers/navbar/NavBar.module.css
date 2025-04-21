@@ -238,8 +238,8 @@
   left: 0;
   width: 100%;
   background: linear-gradient(135deg,
-      rgba(20, 20, 20, 0.98) 0%,
-      rgba(30, 30, 30, 0.98) 100%);
+      var(--navbar-bg) 0%,
+      var(--scrolled-bg) 100%);
   border-top: 1px solid rgba(146, 51, 49, 0.3);
   border-bottom: 1px solid rgba(146, 51, 49, 0.3);
   overflow: hidden;
