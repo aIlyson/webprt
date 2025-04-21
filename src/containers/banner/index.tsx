@@ -104,10 +104,7 @@ const Banner = () => {
 
             <MotionDiv variants={itemVariants}>
               <MotionP className={styles.description}>
-                <span
-                  className={styles.tooltip}
-                  data-tooltip="por cacheadas!"
-                >
+                <span className={styles.tooltip} data-tooltip="por cacheadas!">
                   Apaixonado
                 </span>{" "}
                 em desenvolver projetos que possam ser úteis e páginas web.
@@ -154,9 +151,12 @@ const Banner = () => {
                   src="/person.jpeg"
                   alt="Alysson Michel"
                   className={styles.profileImage}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
+                  onError={(
+                    e: React.SyntheticEvent<HTMLImageElement, Event>
+                  ) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src =
                       "https://images.unsplash.com/photo-1536104968055-4d61aa56f46a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80";
                   }}
                 />

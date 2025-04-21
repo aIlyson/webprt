@@ -12,6 +12,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   size?: "sm" | "md" | "lg";
   className?: string;
+  disabled?: boolean;
   icon?: React.ReactNode;
 }
 
