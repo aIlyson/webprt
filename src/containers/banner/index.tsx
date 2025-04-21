@@ -98,7 +98,7 @@ const Banner = () => {
 
             <MotionDiv variants={itemVariants}>
               <MotionP className={styles.subtitle}>
-                Desenvolvedor Fullstack
+                Desenvolvedor de software
               </MotionP>
             </MotionDiv>
 

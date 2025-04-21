@@ -38,7 +38,13 @@ const About: React.FC = () => {
   };
 
   return (
-    <Section id="about" bg="surface" withPixels={true} pixelCount={10} padding="lg">
+    <Section
+      id="about"
+      bg="surface"
+      withPixels={true}
+      pixelCount={10}
+      padding="lg"
+    >
       <div className={styles.aboutContainer}>
         <Title level={2} withBrackets>
           Sobre Mim
@@ -57,23 +63,24 @@ const About: React.FC = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Desenvolvedor <strong>Fullstack</strong> com foco em soluções
-              robustas
+              Atuando com <strong>desenvolvimento web</strong> e criação de
+              soluções digitais
             </motion.p>
 
             <motion.p variants={itemVariants}>
-              Atualmente cursando o bacharelado em{" "}
-              <strong>Sistemas de Informação na UFPI</strong> e com formação
-              técnica em Informática pelo <strong>IF Sertão-PE</strong>.
+              Graduando em <strong>Sistemas de Informação pela UFPI</strong>,
+              com formação técnica em Informática pelo{" "}
+              <strong>IF SertãoPE</strong>. Gosto de transformar ideias em
+              projetos reais através da programação.
             </motion.p>
 
             <motion.p variants={itemVariants}>
-              Comecei minha jornada na programação em 2021 com projetos em{" "}
-              <strong>Java</strong> durante o curso técnico no{" "}
-              <strong>IF Sertão-PE</strong>, onde também atuei como
-              desenvolvedor web do campus entre 2023 e 2024. Como desenvolvedor
-              voluntário, trabalhei no projeto da ENAMO 2024 utilizando{" "}
-              <strong>Node.js</strong> e <strong>Express</strong>.
+              Minha jornada começou em 2021 durante o curso técnico, onde
+              desenvolvi projetos em <strong>Java</strong> e tive a oportunidade
+              de atuar como desenvolvedor web institucional entre 2023 e 2024.
+              Recentemente, participei como voluntário no projeto da ENAMO 2024,
+              aplicando tecnologias como <strong>Node.js</strong> e{" "}
+              <strong>Express</strong>.
             </motion.p>
           </motion.div>
 

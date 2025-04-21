@@ -84,25 +84,24 @@
 }
 
 .tooltip {
-  color: var(--accent);
   position: relative;
   cursor: pointer;
 }
 
 .tooltip::after {
+  background-color: var(--primary-dark);
+  color: var(--text-base);
   content: attr(data-tooltip);
   position: absolute;
   bottom: 120%;
   left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--primary-dark);
-  color: var(--text-base);
+  font-size: 0.875rem;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   white-space: nowrap;
-  font-size: 0.875rem;
   opacity: 0;
   pointer-events: none;
+  transform: translateX(-50%);
   transition: opacity 0.3s ease;
   z-index: 10;
 }
