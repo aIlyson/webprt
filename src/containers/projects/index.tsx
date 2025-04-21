@@ -137,9 +137,7 @@ const Projects: React.FC = () => {
     setSelectedProject(project);
   };
 
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
+  const closeModal = () => setSelectedProject(null);
 
   return (
     <Section id="projects" bg="surface" padding="lg">
@@ -219,6 +217,39 @@ const Projects: React.FC = () => {
                           </span>
                         ))}
                       </div>
+
+                      {(project.links.demo !== "#private" ||
+                        project.links.code !== "#private") && (
+                        <div
+                          className={styles.projectLinks}
+                          style={{
+                            marginTop: "0.5rem",
+                            display: "flex",
+                            gap: "1rem",
+                          }}
+                        >
+                          {project.links.demo !== "#private" && (
+                            <a
+                              href={project.links.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.projectButton}
+                            >
+                              Demo
+                            </a>
+                          )}
+                          {project.links.code !== "#private" && (
+                            <a
+                              href={project.links.code}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.projectButton}
+                            >
+                              Código
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 ))}

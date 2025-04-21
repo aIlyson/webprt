@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import styles from "./Section.module.css";
 
 interface SectionProps {
@@ -35,7 +35,7 @@ export const Section: React.FC<SectionProps> = ({
   }[padding];
 
   return (
-    <motion.section
+    <Motion.section
       id={id}
       className={`${styles.section} ${bgClass} ${paddingClass} ${className}`}
       initial={{ opacity: 0, y: 40 }}
@@ -46,6 +46,6 @@ export const Section: React.FC<SectionProps> = ({
       <div className={`${styles.container} ${fullWidth ? styles.fullWidth : ''}`}>
         {children}
       </div>
-    </motion.section>
+    </Motion.section>
   );
 };

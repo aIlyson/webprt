@@ -4,7 +4,6 @@ import styles from './Footer.module.css';
 import { GithubIcon } from "../../common/svg/SocialIcons";
 import { OutlookIcon } from "../../common/svg/OutlookIcon";
 
-
 const MotionFooter = motion.footer;
 const MotionLink = motion.a;
 

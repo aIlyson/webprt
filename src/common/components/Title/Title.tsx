@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import styles from "./Title.module.css";
 
+const Motion = motion;
+
 interface TitleProps {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
   children: React.ReactNode;
@@ -22,7 +24,7 @@ export const Title: React.FC<TitleProps> = ({
   align = "left",
 }) => {
   const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
-  
+
   const sizeClass = {
     1: styles.h1,
     2: styles.h2,
@@ -47,14 +49,16 @@ export const Title: React.FC<TitleProps> = ({
   }[align];
 
   return (
-    <motion.div
+    <Motion.div
       className={`${styles.titleWrapper} ${alignClass}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: level * 0.1 }}
     >
-      <Tag className={`${styles.title} ${sizeClass} ${colorClass} ${className}`}>
+      <Tag
+        className={`${styles.title} ${sizeClass} ${colorClass} ${className}`}
+      >
         {withBrackets ? (
           <>
             <span className={styles.bracket}>&lt;</span>
@@ -65,8 +69,12 @@ export const Title: React.FC<TitleProps> = ({
           children
         )}
         {withUnderline && (
-          <motion.div
-            className={`${styles.underline} ${styles[`underline${color.charAt(0).toUpperCase() + color.slice(1)}`]}`}
+          <Motion.div
+            className={`${styles.underline} ${
+              styles[
+                `underline${color.charAt(0).toUpperCase() + color.slice(1)}`
+              ]
+            }`}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -74,6 +82,6 @@ export const Title: React.FC<TitleProps> = ({
           />
         )}
       </Tag>
-    </motion.div>
+    </Motion.div>
   );
 };
