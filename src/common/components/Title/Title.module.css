@@ -106,6 +106,22 @@
   font-size: 1.2em;
 }
 
+.bracketsWrapper {
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.bracket {
+  color: var(--muted-color);
+  transition: all 0.3s ease;
+}
+
+.content {
+  transition: all 0.3s ease;
+  padding: 0 4px;
+}
+
 @media (max-width: 768px) {
   .h1 {
     font-size: 2.5rem;

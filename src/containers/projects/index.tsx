@@ -42,7 +42,7 @@ const projects: Project[] = [
     year: "2025",
     image: "/assets/casi.png",
     links: {
-      demo: "https://casiufpi.site/",
+      demo: "#private",
       code: "#private",
     },
   },

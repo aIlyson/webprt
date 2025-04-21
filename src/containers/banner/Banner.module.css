@@ -84,6 +84,7 @@
 }
 
 .tooltip {
+  color: var(--accent);
   position: relative;
   cursor: pointer;
 }

@@ -51,22 +51,83 @@ export const Title: React.FC<TitleProps> = ({
   return (
     <Motion.div
       className={`${styles.titleWrapper} ${alignClass}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: level * 0.1 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ 
+        scale: withBrackets ? 1.02 : 1.01,
+        transition: { duration: 0.2 }
+      }}
     >
       <Tag
         className={`${styles.title} ${sizeClass} ${colorClass} ${className}`}
       >
         {withBrackets ? (
-          <>
-            <span className={styles.bracket}>&lt;</span>
-            {children}
-            <span className={styles.bracket}>/&gt;</span>
-          </>
+          <Motion.div
+            className={styles.bracketsWrapper}
+            whileHover={{
+              color: "var(--accent-color)",
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Motion.span
+              className={styles.bracket}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3 }}
+              whileHover={{ 
+                x: -2,
+                color: "var(--primary-color)",
+              }}
+            >
+              &lt;
+            </Motion.span>
+            <Motion.span
+              className={styles.content}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              whileHover={{
+                color: "var(--text-color)",
+                padding: "0 2px",
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "2px",
+              }}
+            >
+              {children}
+            </Motion.span>
+            <Motion.span
+              className={styles.bracket}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              whileHover={{ 
+                x: 2,
+                color: "var(--primary-color)",
+              }}
+            >
+              /&gt;
+            </Motion.span>
+          </Motion.div>
         ) : (
-          children
+          <Motion.span
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{
+              color: "var(--accent-color)",
+              padding: "0 2px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderRadius: "2px",
+            }}
+          >
+            {children}
+          </Motion.span>
         )}
         {withUnderline && (
           <Motion.div
@@ -78,7 +139,12 @@ export const Title: React.FC<TitleProps> = ({
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: withBrackets ? 0.6 : 0.2 }}
+            whileHover={{
+              scaleX: 1.1,
+              backgroundColor: "var(--accent-color)",
+              transition: { duration: 0.3 }
+            }}
           />
         )}
       </Tag>

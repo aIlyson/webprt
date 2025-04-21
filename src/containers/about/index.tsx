@@ -90,9 +90,9 @@ const About: React.FC = () => {
               {[
                 { name: "JAVA, EXPRESS", level: 87 },
                 { name: "JAVASCRIPT, NODEJS", level: 83 },
-                { name: "JAVASCRIPT", level: 77 },
-                { name: "SQL, FIREBASE, POSTGRESQL", level: 73 },
-                { name: "C, PYTHON, VUE ", level: 66 },
+                { name: "JAVASCRIPT", level: 76 },
+                { name: "SQL, FIREBASE, POSTGRESQL", level: 72 },
+                { name: "C, PYTHON, VUE ", level: 67 },
               ].map((skill, index) => (
                 <motion.div
                   key={skill.name}
