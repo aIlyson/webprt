@@ -7,8 +7,7 @@ export default function Document() {
       <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="Allyson Michel" />
-        {/* <title>Allyson Michel</title> */}
+        <meta name="author" content="Alysson Michel" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -20,8 +19,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <link rel="icon" href="../../icon.png" type="image/png" />
-        <meta name="theme-color" content="#fff" />
-        <meta name="description" content="Sonho de desenvolvedor" />
+        <meta name="description" content="Alysson Michel portfolio page" />
       </Head>
       <body>
         <Main />
