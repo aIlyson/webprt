@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  AnimatePresence,
+} from "framer-motion";
 import { useAppContext } from "../../common/context/appContext";
 import styles from "./NavBar.module.css";
 import MoonIcon from "../../common/svg/MoonIcon";
@@ -21,22 +26,30 @@ const NavBar: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      
+
       if (isMenuOpen) {
         setIsMenuOpen(false);
       }
 
       const sections = document.querySelectorAll("section");
+      let foundActive = false;
+
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
+
         if (
-          window.scrollY >= sectionTop - 300 &&
-          window.scrollY < sectionTop + sectionHeight - 300
+          window.scrollY >= sectionTop - 100 &&
+          window.scrollY < sectionTop + sectionHeight - 100
         ) {
           setActiveSection(section.id);
+          foundActive = true;
         }
       });
+
+      if (!foundActive) {
+        setActiveSection("home");
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -112,16 +125,18 @@ const NavBar: React.FC = () => {
             <motion.button
               onClick={toggleTheme}
               className={styles.themeToggle}
-              aria-label={`Alternar para tema ${theme === 'light' ? 'escuro' : 'claro'}`}
+              aria-label={`Alternar para tema ${
+                theme === "light" ? "escuro" : "claro"
+              }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={theme}
-                  initial={{ opacity: 0, rotate: theme === 'light' ? 90 : -90 }}
+                  initial={{ opacity: 0, rotate: theme === "light" ? 90 : -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: theme === 'light' ? -90 : 90 }}
+                  exit={{ opacity: 0, rotate: theme === "light" ? -90 : 90 }}
                   transition={{ duration: 0.3 }}
                   className={styles.themeIcon}
                 >
