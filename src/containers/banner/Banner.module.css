@@ -56,11 +56,27 @@
 
 .name {
   color: var(--text-base);
+  position: relative;
   display: inline-block;
   font-size: 3rem;
   font-weight: 700;
   font-family: 'Fira Code', monospace;
   line-height: 1.2;
+}
+
+.name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.name:hover::after {
+  width: 100%;
 }
 
 .codeSymbol {

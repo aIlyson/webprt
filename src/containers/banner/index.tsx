@@ -85,8 +85,8 @@ const Banner = () => {
 
         <div className={styles.container}>
           <MotionDiv className={styles.textColumn} variants={containerVariants}>
-            <MotionDiv variants={itemVariants}>
-              <MotionH1 className={styles.title}>
+            <MotionDiv variants={itemVariants} whileHover={{ scale: 1.02 }}>
+              <MotionH1 className={styles.title} whileHover={{ y: -5 }}>
                 <span className={styles.greeting}>Olá, eu sou</span>
                 <span className={styles.name}>
                   <span className={styles.codeSymbol}>&lt;</span>
@@ -108,8 +108,9 @@ const Banner = () => {
                   Apaixonado
                 </span>{" "}
                 em desenvolver projetos que possam ser úteis e páginas web.
-                Atualmente em um projeto de pesquisa pelo IFSertãoPE, e procuro
-                me especializar mais em JavaScript, Ruby e Python.
+                Atualmente em uma pesquisa e já participei de um projeto de
+                extensão pelo IFSertãoPE, e procuro me especializar mais em
+                JavaScript, Ruby e Python.
               </MotionP>
             </MotionDiv>
 

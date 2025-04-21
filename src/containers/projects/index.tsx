@@ -60,7 +60,7 @@ const projects: Project[] = [
   {
     title: "AedesInfo",
     description:
-      "Aplicativo desenvolvido para a Prefeitura de Ouricuri para o monitoramento do Aedes aegypti",
+      "Aplicativo desenvolvido para a Prefeitura de Ouricuri para o monitoramento do Aedes aegypti.",
     tags: ["React Native", "Firebase", "Redux"],
     year: "2024",
     image: "/assets/noimage.png",
