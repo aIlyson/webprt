@@ -23,18 +23,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "ENAMO 2024",
-    description:
-      "Site oficial do evento acadêmico ENAMO sistema de inscrições e programação completa.",
-    tags: ["Node.js", "Handlebars", "Tailwind"],
-    year: "2024",
-    image: "/assets/enamo2024.png",
-    links: {
-      demo: "https://enamo2024.ouricuri.ifsertao-pe.edu.br/",
-      code: "#private",
-    },
-  },
-  {
     title: "Sistema de RH",
     description:
       "Sistema desenvolvido com funcionalidades de cadastro de funcionários e contratos.",
@@ -43,7 +31,7 @@ const projects: Project[] = [
     image: "/assets/sistema.png",
     links: {
       demo: "#private",
-      code: "#private",
+      code: "https://github.com/aIlyson/spring-boot-prog-funcionario",
     },
   },
   {
@@ -55,6 +43,18 @@ const projects: Project[] = [
     image: "/assets/casi.png",
     links: {
       demo: "https://casiufpi.site/",
+      code: "#private",
+    },
+  },
+  {
+    title: "ENAMO 2024",
+    description:
+      "Site oficial do evento acadêmico ENAMO sistema de inscrições e programação completa.",
+    tags: ["Node.js", "Handlebars", "Tailwind"],
+    year: "2024",
+    image: "/assets/enamo2024.png",
+    links: {
+      demo: "https://enamo2024.ouricuri.ifsertao-pe.edu.br/",
       code: "#private",
     },
   },
@@ -95,7 +95,7 @@ const projects: Project[] = [
     },
   },
   {
-    title: "ClassKey",
+    title: "Class Key",
     description:
       "Sistema para registro e gerenciamento de chaves, professores e reservas de sala.",
     tags: ["Java"],
@@ -115,7 +115,7 @@ const projects: Project[] = [
     image: "/assets/noimage.png",
     links: {
       demo: "#private",
-      code: "#private",
+      code: "https://github.com/aIlyson/webprt",
     },
   },
 ];
@@ -140,7 +140,13 @@ const Projects: React.FC = () => {
   const closeModal = () => setSelectedProject(null);
 
   return (
-    <Section id="projects" bg="surface" padding="lg">
+    <Section
+      id="projects"
+      bg="surface"
+      withPixels={true}
+      pixelCount={10}
+      padding="lg"
+    >
       <div className={styles.header}>
         <Title level={2} withBrackets align="center">
           Projetos
@@ -218,38 +224,45 @@ const Projects: React.FC = () => {
                         ))}
                       </div>
 
-                      {(project.links.demo !== "#private" ||
-                        project.links.code !== "#private") && (
-                        <div
-                          className={styles.projectLinks}
-                          style={{
-                            marginTop: "0.5rem",
-                            display: "flex",
-                            gap: "1rem",
-                          }}
-                        >
-                          {project.links.demo !== "#private" && (
-                            <a
-                              href={project.links.demo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={styles.projectButton}
-                            >
-                              Demo
-                            </a>
-                          )}
-                          {project.links.code !== "#private" && (
-                            <a
-                              href={project.links.code}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={styles.projectButton}
-                            >
-                              Código
-                            </a>
-                          )}
-                        </div>
-                      )}
+                      <div className={styles.projectLinks}>
+                        {project.links.demo === "#private" ? (
+                          <button
+                            className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
+                            disabled
+                            data-tooltip="Demo privada :c"
+                          >
+                            Demo 🔒
+                          </button>
+                        ) : (
+                          <a
+                            href={project.links.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${styles.projectButton} ${styles.demoButton}`}
+                          >
+                            Demo
+                          </a>
+                        )}
+
+                        {project.links.code === "#private" ? (
+                          <button
+                            className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
+                            disabled
+                            data-tooltip="Repositório privado :c"
+                          >
+                            Código 🔒
+                          </button>
+                        ) : (
+                          <a
+                            href={project.links.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`${styles.projectButton} ${styles.codeButton}`}
+                          >
+                            Código
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 ))}

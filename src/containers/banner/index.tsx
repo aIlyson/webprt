@@ -104,10 +104,15 @@ const Banner = () => {
 
             <MotionDiv variants={itemVariants}>
               <MotionP className={styles.description}>
-                Apaixonado por em desenvolver projetos que possam ser úteis e
-                páginas web. Atualmente em um projeto de pesquisa pelo
-                IFSertãoPE, e procuro me especializar mais em JavaScript, Ruby e
-                Python.
+                <span
+                  className={styles.tooltip}
+                  data-tooltip="por cacheadas!"
+                >
+                  Apaixonado
+                </span>{" "}
+                em desenvolver projetos que possam ser úteis e páginas web.
+                Atualmente em um projeto de pesquisa pelo IFSertãoPE, e procuro
+                me especializar mais em JavaScript, Ruby e Python.
               </MotionP>
             </MotionDiv>
 

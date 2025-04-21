@@ -1,5 +1,5 @@
 .nav {
-  background-color: rgba(30, 30, 30, 0.8);
+  background-color: var(--navbar-bg);
   position: fixed;
   top: 0;
   left: 0;
@@ -12,13 +12,13 @@
 }
 
 .nav.scrolled {
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: var(--scrolled-bg);
   padding: 0.5rem 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .nav.menuOpen {
-  background-color: rgba(30, 30, 30, 0.98) !important;
+  background-color: var(--scrolled-bg) !important;
   backdrop-filter: blur(15px);
 }
 

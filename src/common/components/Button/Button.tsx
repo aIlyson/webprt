@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import styles from "./Button.module.css";
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 interface ButtonProps {
   children: React.ReactNode;

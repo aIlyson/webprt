@@ -3,7 +3,7 @@ import { Section, Title, Button } from "../../common/components";
 import styles from "./Contact.module.css";
 
 const Contact: React.FC = () => (
-  <Section id="contact" bg="base" padding="lg">
+  <Section id="contact" bg="base" withPixels={true} pixelCount={10} padding="lg">
     <div className={styles.contactContainer}>
       <Title level={2} withUnderline align="center">
         Vamos Conversar

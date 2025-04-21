@@ -19,7 +19,7 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Press+Start+2P&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="../../icon.ico" type="image/png" />
+        <link rel="icon" href="../../icon.png" type="image/png" />
         <meta name="theme-color" content="#fff" />
         <meta name="description" content="Sonho de desenvolvedor" />
       </Head>

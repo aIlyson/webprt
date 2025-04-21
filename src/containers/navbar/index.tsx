@@ -1,4 +1,3 @@
-// src/components/NavBar/NavBar.tsx
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useAppContext } from "../../common/context/appContext";
@@ -113,19 +112,22 @@ const NavBar: React.FC = () => {
             <motion.button
               onClick={toggleTheme}
               className={styles.themeToggle}
-              aria-label="Alternar tema"
+              aria-label={`Alternar para tema ${theme === 'light' ? 'escuro' : 'claro'}`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <motion.div
-                key={theme}
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.3 }}
-                className={styles.themeIcon}
-              >
-                {theme === "light" ? <MoonIcon /> : <SunIcon />}
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={theme}
+                  initial={{ opacity: 0, rotate: theme === 'light' ? 90 : -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: theme === 'light' ? -90 : 90 }}
+                  transition={{ duration: 0.3 }}
+                  className={styles.themeIcon}
+                >
+                  {theme === "light" ? <MoonIcon /> : <SunIcon />}
+                </motion.div>
+              </AnimatePresence>
               <span className={styles.themeToggleBorder} />
             </motion.button>
 

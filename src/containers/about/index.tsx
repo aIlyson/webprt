@@ -38,7 +38,7 @@ const About: React.FC = () => {
   };
 
   return (
-    <Section id="about" bg="surface" padding="lg">
+    <Section id="about" bg="surface" withPixels={true} pixelCount={10} padding="lg">
       <div className={styles.aboutContainer}>
         <Title level={2} withBrackets>
           Sobre Mim
@@ -88,11 +88,11 @@ const About: React.FC = () => {
 
             <div className={styles.skillsGrid}>
               {[
-                { name: "JAVA", level: 92 },
-                { name: "JAVASCRIPT", level: 88 },
-                { name: "EXPRESS", level: 85 },
-                { name: "TYPESCRIPT", level: 83 },
-                { name: "C", level: 78 },
+                { name: "JAVA, EXPRESS", level: 87 },
+                { name: "JAVASCRIPT, NODEJS", level: 83 },
+                { name: "JAVASCRIPT", level: 77 },
+                { name: "SQL, FIREBASE, POSTGRESQL", level: 73 },
+                { name: "C, PYTHON, VUE ", level: 66 },
               ].map((skill, index) => (
                 <motion.div
                   key={skill.name}
