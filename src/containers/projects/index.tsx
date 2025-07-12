@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Section, Title } from "../../common/components/index";
 import { motion } from "framer-motion";
 import styles from "./Projects.module.css";
@@ -24,7 +24,7 @@ const projects: Project[] = [
   {
     title: "Sistema de RH",
     description:
-      "Sistema desenvolvido com funcionalidades de cadastro de funcionários e contratos.",
+      "Desenvolvimento de um sistema para cadastro e gerenciamento de funcionários e contratos.",
     tags: ["Java", "Spring Boot", "MySQL", "Thymeleaf"],
     year: "2023",
     image: "/assets/sistema.png",
@@ -36,18 +36,19 @@ const projects: Project[] = [
   {
     title: "CASI UFPI",
     description:
-      "Apresentação do Centro Acadêmico de Sistemas de Informação com sistema de autenticação.",
+      "Desenvolvimento de um sistema para o Centro Acadêmico com autenticação de usuários.",
     tags: ["Node.js", "Express", "PostgreSQL", "EJS"],
     year: "2025",
-    image: "/assets/casi.png",
+    image: "/assets/casiufpi.site_.png",
     links: {
       demo: "https://casiufpi.site/",
       code: "#private",
     },
   },
   {
-    title: "JUÁ Soluções em Tecnologia",
-    description: "Website institucional da empresa júnior JUÁ Soluções.",
+    title: "JUÁ Soluções",
+    description:
+      "Desenvolvimento do site oficial da empresa júnior JUÁ Soluções em Tecnologia.",
     tags: ["Vue.js", "Node.js", "GSAP"],
     year: "2025",
     image: "/assets/juasolucoes.site.png",
@@ -71,10 +72,10 @@ const projects: Project[] = [
   {
     title: "ENAMO 2024",
     description:
-      "Site oficial do evento acadêmico ENAMO sistema de inscrições e programação completa.",
+      "Desenvolvimento do site do ENAMO com sistema de inscrições e programação.",
     tags: ["Node.js", "Handlebars", "Tailwind"],
     year: "2024",
-    image: "/assets/enamo2024.png",
+    image: "/assets/enamo2024.ouricuri.png",
     links: {
       demo: "https://enamo2024.ouricuri.ifsertao-pe.edu.br/",
       code: "#private",
@@ -83,10 +84,10 @@ const projects: Project[] = [
   {
     title: "AedesInfo",
     description:
-      "Aplicativo desenvolvido para a Prefeitura de Ouricuri para o monitoramento do Aedes aegypti.",
+      "Desenvolvimento de um app para a Prefeitura de Ouricuri monitorar o Aedes aegypti.",
     tags: ["React Native", "Firebase", "Redux"],
     year: "2024",
-    image: "/assets/noimage.png",
+    image: "/assets/aedesinfo.png",
     links: {
       demo: "#private",
       code: "https://github.com/aIlyson/AedesInfo",
@@ -95,7 +96,7 @@ const projects: Project[] = [
   {
     title: "Class Key",
     description:
-      "Sistema para registro e gerenciamento de chaves, professores e reservas de sala.",
+      "Desenvolvimento de um sistema para controle de chaves, professores e reservas de salas.",
     tags: ["Java"],
     year: "2022",
     image: "/assets/noimage.png",
@@ -107,7 +108,7 @@ const projects: Project[] = [
   {
     title: "Este Site",
     description:
-      "Meu portfólio desenvolvido para apresentar um pouco sobre mim.",
+      "Meu site portfólio para apresentação sobre mim, de projetos e habilidades.",
     tags: ["React", "Next.js", "Framer Motion"],
     year: "2023",
     image: "/assets/portf.png",
@@ -129,13 +130,148 @@ const chunkProjects = (projects: Project[], size: number) => {
 const Projects: React.FC = () => {
   const projectChunks = chunkProjects(projects, 4);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [startTouch, setStartTouch] = useState({ x: 0, y: 0 });
+  const [isZoomed, setIsZoomed] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const lastTapRef = useRef(0);
 
   const handleImageClick = (project: Project, e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedProject(project);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    setIsZoomed(false);
   };
 
-  const closeModal = () => setSelectedProject(null);
+  const closeModal = () => {
+    setSelectedProject(null);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    setIsZoomed(false);
+  };
+
+  const handleZoom = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!imageRef.current) return;
+
+    const rect = imageRef.current.getBoundingClientRect();
+    let clientX, clientY;
+
+    if ("touches" in e) {
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+      e.preventDefault();
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
+
+    const newScale = scale === 1 ? 2 : 1;
+    const newX =
+      newScale === 1 ? 0 : -(offsetX - rect.width / 2) * (newScale - 1);
+    const newY =
+      newScale === 1 ? 0 : -(offsetY - rect.height / 2) * (newScale - 1);
+
+    setScale(newScale);
+    setPosition({ x: newX, y: newY });
+    setIsZoomed(newScale > 1);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (scale <= 1) return;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || scale <= 1) return;
+
+    setPosition((prev) => ({
+      x: clampPosition(prev.x + e.movementX, scale),
+      y: clampPosition(prev.y + e.movementY, scale),
+    }));
+  };
+
+  const clampPosition = (value: number, currentScale: number) => {
+    if (!imageRef.current) return value;
+    const maxMovement = ((currentScale - 1) * imageRef.current.clientWidth) / 2;
+    return Math.max(-maxMovement, Math.min(maxMovement, value));
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+
+    if (now - lastTapRef.current < DOUBLE_TAP_DELAY) {
+      handleZoom(e);
+      lastTapRef.current = 0;
+    } else {
+      lastTapRef.current = now;
+
+      if (scale > 1) {
+        const touch = e.touches[0];
+        setStartTouch({ x: touch.clientX, y: touch.clientY });
+      }
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (scale <= 1) return;
+    e.preventDefault();
+
+    const touch = e.touches[0];
+    setPosition((prev) => ({
+      x: clampPosition(prev.x + (touch.clientX - startTouch.x), scale),
+      y: clampPosition(prev.y + (touch.clientY - startTouch.y), scale),
+    }));
+    setStartTouch({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = () => {
+    if (!isZoomed) {
+      closeModal();
+    }
+  };
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    handleZoom(e);
+  };
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.touchAction = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.body.style.touchAction = "auto";
+    };
+  }, [selectedProject]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && selectedProject) {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProject]);
 
   return (
     <Section
@@ -273,25 +409,64 @@ const Projects: React.FC = () => {
       </div>
 
       {selectedProject && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
+        <div
+          className={styles.modalOverlay}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeModal();
+            }
+          }}
+          ref={modalRef}
+        >
           <div
             className={styles.imageModalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <button className={styles.closeButton} onClick={closeModal}>
+            <button
+              className={styles.closeButton}
+              onClick={closeModal}
+              aria-label="Fechar modal"
+            >
               &times;
             </button>
-            <div className={styles.modalImageContainer}>
+            <div
+              ref={imageRef}
+              className={styles.modalImageContainer}
+              onClick={isZoomed ? undefined : handleZoom}
+              onDoubleClick={handleDoubleClick}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{
+                transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
+                cursor:
+                  scale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
+                touchAction: scale > 1 ? "none" : "auto",
+              }}
+            >
               <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 width={800}
                 height={450}
                 className={styles.modalImage}
+                priority
               />
             </div>
             <div className={styles.imageModalFooter}>
               <h3>{selectedProject.title}</h3>
+              <div className={styles.zoomIndicator}>
+                {Math.round(scale * 100)}%
+              </div>
+              {isZoomed && (
+                <p className={styles.zoomHint}>
+                  Arraste para mover | Toque duas vezes para reduzir
+                </p>
+              )}
             </div>
           </div>
         </div>

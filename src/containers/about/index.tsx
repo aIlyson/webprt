@@ -63,8 +63,9 @@ const About: React.FC = () => {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Atuando com <strong>desenvolvimento web</strong> e criação de
-              soluções digitais
+              Atuando com <strong>desenvolvimento web</strong>, criando
+              interfaces e sistemas que funcionam bem e fazem sentido para quem
+              usa.
             </motion.p>
 
             <motion.p variants={itemVariants}>
