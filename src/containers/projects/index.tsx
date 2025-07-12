@@ -46,6 +46,29 @@ const projects: Project[] = [
     },
   },
   {
+    title: "JUÁ Soluções em Tecnologia",
+    description: "Website institucional da empresa júnior JUÁ Soluções.",
+    tags: ["Vue.js", "Node.js", "GSAP"],
+    year: "2025",
+    image: "/assets/juasolucoes.site.png",
+    links: {
+      demo: "#private",
+      code: "#private",
+    },
+  },
+  {
+    title: "CTBJ-Study",
+    description:
+      "Desenvolvimento de um catálogo digital para disciplinas do Colégio Técnico.",
+    tags: ["React", "Chart.js", "Node.js", "MongoDB"],
+    year: "2024",
+    image: "/assets/ctbj-study.onrender.png",
+    links: {
+      demo: "https://ctbj-study.onrender.com/",
+      code: "https://github.com/aIlyson/CTBJ-STUDY",
+    },
+  },
+  {
     title: "ENAMO 2024",
     description:
       "Site oficial do evento acadêmico ENAMO sistema de inscrições e programação completa.",
@@ -67,30 +90,6 @@ const projects: Project[] = [
     links: {
       demo: "#private",
       code: "https://github.com/aIlyson/AedesInfo",
-    },
-  },
-  {
-    title: "Stock Manager",
-    description:
-      "Sistema de gerenciamento de estoque de uma locadora de animes.",
-    tags: ["C", "MakeFile"],
-    year: "2024",
-    image: "/assets/noimage.png",
-    links: {
-      demo: "#private",
-      code: "https://github.com/aIlyson/algo-2024",
-    },
-  },
-  {
-    title: "CTBJ-Study",
-    description:
-      "Desenvolvimento de um catálogo digital para disciplinas do Colégio Técnico.",
-    tags: ["React", "Chart.js", "Node.js", "MongoDB"],
-    year: "2024",
-    image: "/assets/ctbjstudy.png",
-    links: {
-      demo: "https://ctbj-study.onrender.com/",
-      code: "https://github.com/aIlyson/CTBJ-STUDY",
     },
   },
   {
