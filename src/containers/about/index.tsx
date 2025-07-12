@@ -95,11 +95,12 @@ const About: React.FC = () => {
 
             <div className={styles.skillsGrid}>
               {[
-                { name: "JAVA, EXPRESS", level: 87 },
-                { name: "JAVASCRIPT, NODEJS", level: 83 },
-                { name: "C", level: 76 },
-                { name: "SQL, FIREBASE, POSTGRESQL", level: 72 },
-                { name: "RUBY, PYTHON, VUE ", level: 67 },
+                { name: "TYPESCRIPT, NODEJS", level: 91 },
+                { name: "VUE, REACT", level: 87 },
+                { name: "EXPRESS, NESTJS", level: 84 },
+                { name: "NEXTJS, POSTGRESQL", level: 78 },
+                { name: "JAVA", level: 72 },
+                { name: "PYTHON, KOTLIN", level: 68 },
               ].map((skill, index) => (
                 <motion.div
                   key={skill.name}
