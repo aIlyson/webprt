@@ -3,9 +3,6 @@ import { Section, Title, Button } from "../../common/components";
 import styles from "./Contact.module.css";
 import emailjs from "@emailjs/browser";
 
-// Inicializa o EmailJS com seu User ID
-emailjs.init("SIippbcoyK5cnPBcI");
-
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +73,6 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validações
     if (
       !formData.name.trim() ||
       !formData.email.trim() ||
@@ -114,26 +110,24 @@ const Contact: React.FC = () => {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_email: "alyssonmichel20@gmail.com",
         reply_to: formData.email,
-        subject: `Nova mensagem de ${formData.name}`,
+        to_email: "alysson.michel@outlook.com",
       };
 
-      console.log("Enviando email com params:", templateParams);
-
       const response = await emailjs.send(
-        "service_udja0lg",
-        "template_zhy0h5v",
-        templateParams
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      console.log("Email enviado com sucesso:", response);
+      console.log("Email enviado:", response);
 
       setIsSent(true);
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setIsSent(false), 5000);
     } catch (err) {
-      console.error("Erro detalhado no envio:", err);
+      console.error("Erro no envio:", err);
       setError(
         "Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente mais tarde."
       );

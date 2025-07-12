@@ -5,6 +5,7 @@ import styles from "./Projects.module.css";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import { Lock, Search } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -334,7 +335,11 @@ const Projects: React.FC = () => {
                         priority={index < 4}
                       />
                       <div className={styles.imageOverlay}>
-                        <span className={styles.zoomIcon}>🔍</span>
+                        <Search
+                          className={styles.zoomIcon}
+                          size={30}
+                          strokeWidth={2}
+                        />
                       </div>
                     </div>
 
@@ -365,7 +370,7 @@ const Projects: React.FC = () => {
                             disabled
                             data-tooltip="Demo privada :c"
                           >
-                            Demo 🔒
+                            <Lock size={16} className={styles.lockIcon} /> Demo
                           </button>
                         ) : (
                           <a
@@ -384,7 +389,8 @@ const Projects: React.FC = () => {
                             disabled
                             data-tooltip="Repositório privado :c"
                           >
-                            Código 🔒
+                            <Lock size={16} className={styles.lockIcon} />{" "}
+                            Código
                           </button>
                         ) : (
                           <a

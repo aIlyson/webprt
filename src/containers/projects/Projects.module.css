@@ -77,10 +77,16 @@
 
 .zoomIcon {
   background: rgba(0, 0, 0, 0.5);
-  color: var(--base);
+  color: var(--accent);
   font-size: 2rem;
   padding: 0.5rem;
   border-radius: 50%;
+}
+
+.lockIcon {
+  color: var(--text-base);
+  margin-right: 0.4rem;
+  vertical-align: middle;
 }
 
 .cardContent {
