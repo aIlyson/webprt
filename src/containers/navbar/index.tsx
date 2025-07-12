@@ -56,11 +56,28 @@ const NavBar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isMenuOpen]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
   const navItems = [
-    { name: "Início", href: "#home", id: "home" },
-    { name: "Sobre", href: "#about", id: "about" },
-    { name: "Projetos", href: "#projects", id: "projects" },
-    { name: "Contato", href: "#contact", id: "contact" },
+    { name: "Início", id: "home" },
+    { name: "Sobre", id: "about" },
+    { name: "Projetos", id: "projects" },
+    { name: "Contato", id: "contact" },
   ];
 
   const toggleMenu = () => {
@@ -92,6 +109,8 @@ const NavBar: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
+              onClick={scrollToTop}
+              style={{ cursor: "pointer" }}
             >
               ALYSSON
             </motion.span>
@@ -105,19 +124,19 @@ const NavBar: React.FC = () => {
 
           <div className={styles.navItems}>
             {navItems.map((item, index) => (
-              <motion.a
+              <motion.button
                 key={item.name}
-                href={item.href}
                 className={`${styles.navLink} ${
                   activeSection === item.id ? styles.active : ""
                 }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                onClick={() => scrollToSection(item.id)}
               >
                 <span className={styles.navLinkText}>{item.name}</span>
                 <span className={styles.underline} />
-              </motion.a>
+              </motion.button>
             ))}
           </div>
 
@@ -203,9 +222,8 @@ const NavBar: React.FC = () => {
             >
               <div className={styles.mobileNavItems}>
                 {navItems.map((item, index) => (
-                  <motion.a
+                  <motion.button
                     key={item.name}
-                    href={item.href}
                     className={`${styles.mobileNavLink} ${
                       activeSection === item.id ? styles.active : ""
                     }`}
@@ -213,7 +231,10 @@ const NavBar: React.FC = () => {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: -20, opacity: 0 }}
                     transition={{ duration: 0.2, delay: index * 0.1 }}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      scrollToSection(item.id);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     {item.name}
                     <motion.span
@@ -222,7 +243,7 @@ const NavBar: React.FC = () => {
                       animate={{ scaleX: activeSection === item.id ? 1 : 0 }}
                       transition={{ duration: 0.3 }}
                     />
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </motion.div>
