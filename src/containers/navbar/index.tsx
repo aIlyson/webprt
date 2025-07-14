@@ -59,7 +59,7 @@ const NavBar: React.FC = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
@@ -68,7 +68,7 @@ const NavBar: React.FC = () => {
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
-        block: "start"
+        block: "start",
       });
     }
   };
@@ -232,8 +232,10 @@ const NavBar: React.FC = () => {
                     exit={{ x: -20, opacity: 0 }}
                     transition={{ duration: 0.2, delay: index * 0.1 }}
                     onClick={() => {
-                      scrollToSection(item.id);
                       setIsMenuOpen(false);
+                      setTimeout(() => {
+                        scrollToSection(item.id);
+                      }, 200);
                     }}
                   >
                     {item.name}
