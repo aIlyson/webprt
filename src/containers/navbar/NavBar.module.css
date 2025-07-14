@@ -63,6 +63,10 @@
   align-items: center;
   font-family: 'Fira Code', monospace;
   font-size: 1.2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: pointer;
 }
 
 .logoAccent {
@@ -72,6 +76,7 @@
 .logoText {
   font-weight: 500;
   margin: 0 0.3rem;
+  user-select: none;
 }
 
 .cursor {

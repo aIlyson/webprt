@@ -110,7 +110,6 @@ const NavBar: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
               onClick={scrollToTop}
-              style={{ cursor: "pointer" }}
             >
               ALYSSON
             </motion.span>
