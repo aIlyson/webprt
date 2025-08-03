@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./Banner.module.css";
@@ -49,6 +49,53 @@ const Banner = () => {
       },
     },
   };
+
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (imageContainerRef.current) {
+      const rect = imageContainerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const maxTilt = 6;
+      const tiltX = ((centerY - y) / (centerY * 0.7)) * maxTilt;
+      const tiltY = ((x - centerX) / (centerX * 0.7)) * maxTilt;
+
+      imageContainerRef.current.style.transform = `
+        perspective(1000px)
+        rotateX(${tiltX}deg)
+        rotateY(${tiltY}deg)
+        scale(1.02)
+      `;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (imageContainerRef.current) {
+        const relatedTarget = e.relatedTarget as Node;
+        const wrapper = imageContainerRef.current.parentElement;
+        if (
+          wrapper &&
+          relatedTarget instanceof Node &&
+          wrapper.contains(relatedTarget)
+        ) {
+          return;
+        }
+
+        imageContainerRef.current.style.transform = `
+        perspective(1000px)
+        rotateX(2deg)
+        rotateY(2deg)
+        scale(1)
+      `;
+      }
+    },
+    []
+  );
 
   return (
     <div id="home">
@@ -147,7 +194,12 @@ const Banner = () => {
 
           <MotionDiv className={styles.imageColumn} variants={imageVariants}>
             <div className={styles.imageWrapper}>
-              <div className={styles.imageContainer}>
+              <div
+                className={styles.imageContainer}
+                ref={imageContainerRef}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              >
                 <Image
                   src="/person.jpeg"
                   alt="Alysson Michel"

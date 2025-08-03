@@ -134,7 +134,6 @@
   font-size: 0.875rem;
 }
 
-
 .socialLinks {
   display: flex;
   gap: 1.5rem;
@@ -174,6 +173,7 @@
 .imageWrapper {
   position: relative;
   perspective: 1000px;
+  border: 5px solid transparent;
 }
 
 .imageContainer {
@@ -181,7 +181,10 @@
   border-radius: 12px;
   overflow: hidden;
   transform-style: preserve-3d;
-  transform: rotateY(-5deg) rotateX(2deg);
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+  /* Inclinação inicial */
+  transition: transform 0.6s ease-out;
+  /* Transição mais suave */
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
@@ -193,11 +196,6 @@
   z-index: 2;
   border-radius: 12px;
   filter: contrast(1.05) brightness(1.05);
-  transition: transform 0.5s ease;
-}
-
-.profileImage:hover {
-  transform: scale(1.05);
 }
 
 .imageGlow {
@@ -211,6 +209,7 @@
   bottom: -10px;
   z-index: 1;
   animation: pulse 6s infinite alternate;
+  pointer-events: none; /* fallback */
 }
 
 .imageBorder {
@@ -221,9 +220,8 @@
   bottom: 0;
   border: 2px solid var(--accent);
   border-radius: 12px;
-  pointer-events: none;
-  opacity: 0.5;
   z-index: 3;
+  pointer-events: none; /* fallback */
 }
 
 @keyframes pulse {

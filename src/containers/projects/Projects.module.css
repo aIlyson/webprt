@@ -16,10 +16,14 @@
 
 .projectsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   gap: 1.5rem;
   padding: 0 1rem;
+  margin-bottom: 0.5rem;
   cursor: grab;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .projectCard {
@@ -32,6 +36,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-width: 100%;
+  /* Evita que os cartões fiquem muito largos */
 }
 
 .projectCard:hover {
@@ -39,6 +45,7 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
+/* Demais estilos mantidos sem alterações */
 .imageWrapper {
   position: relative;
   height: 10rem;
@@ -236,7 +243,6 @@
 
 .imageModalContent {
   background: var(--base);
-
   width: 800px;
   max-width: 90%;
   max-height: 90vh;
@@ -356,9 +362,16 @@
   transform: scale(1.2);
 }
 
+@media (max-width: 1190px) {
+  .projectsGrid {
+    grid-template-columns: repeat(2, minmax(18rem, 1fr));
+    gap: 2.25rem;
+  }
+}
+
 @media (max-width: 768px) {
   .projectsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     gap: 1rem;
   }
 
@@ -414,6 +427,8 @@
   }
 
   .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
     padding: 0 0.75rem;
   }
 
