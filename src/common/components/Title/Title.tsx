@@ -55,9 +55,9 @@ export const Title: React.FC<TitleProps> = ({
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      whileHover={{ 
+      whileHover={{
         scale: withBrackets ? 1.02 : 1.01,
-        transition: { duration: 0.2 }
+        transition: { duration: 0.2 },
       }}
     >
       <Tag
@@ -67,8 +67,7 @@ export const Title: React.FC<TitleProps> = ({
           <Motion.div
             className={styles.bracketsWrapper}
             whileHover={{
-              color: "var(--accent-color)",
-              transition: { duration: 0.3 }
+              transition: { duration: 0.3 },
             }}
           >
             <Motion.span
@@ -77,7 +76,7 @@ export const Title: React.FC<TitleProps> = ({
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
-              whileHover={{ 
+              whileHover={{
                 x: -2,
                 color: "var(--primary-color)",
               }}
@@ -85,13 +84,12 @@ export const Title: React.FC<TitleProps> = ({
               &lt;
             </Motion.span>
             <Motion.span
-              className={styles.content}
+              className={`${styles.content} ${colorClass} ${styles.contentHover}`}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.2 }}
               whileHover={{
-                color: "var(--text-color)",
                 padding: "0 2px",
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
                 borderRadius: "2px",
@@ -105,7 +103,7 @@ export const Title: React.FC<TitleProps> = ({
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.4 }}
-              whileHover={{ 
+              whileHover={{
                 x: 2,
                 color: "var(--primary-color)",
               }}
@@ -115,12 +113,12 @@ export const Title: React.FC<TitleProps> = ({
           </Motion.div>
         ) : (
           <Motion.span
+            className={`${styles.content} ${colorClass} ${styles.contentHover}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{
-              color: "var(--accent-color)",
               padding: "0 2px",
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               borderRadius: "2px",
@@ -143,7 +141,7 @@ export const Title: React.FC<TitleProps> = ({
             whileHover={{
               scaleX: 1.1,
               backgroundColor: "var(--accent-color)",
-              transition: { duration: 0.3 }
+              transition: { duration: 0.3 },
             }}
           />
         )}

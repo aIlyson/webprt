@@ -106,7 +106,7 @@
 
 .tooltip::after {
   background-color: var(--primary-dark);
-  color: var(--text-base);
+  color: var(--base);
   content: attr(data-tooltip);
   position: absolute;
   bottom: 120%;

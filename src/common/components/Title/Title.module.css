@@ -104,6 +104,7 @@
   color: var(--primary);
   font-weight: bold;
   font-size: 1.2em;
+  transition: all 0.3s ease;
 }
 
 .bracketsWrapper {
@@ -112,14 +113,15 @@
   transition: all 0.3s ease;
 }
 
-.bracket {
-  color: var(--muted-color);
-  transition: all 0.3s ease;
-}
-
 .content {
+  display: inline;
+  white-space: nowrap;
   transition: all 0.3s ease;
   padding: 0 4px;
+}
+
+.contentHover:hover {
+  color: var(--accent-color) !important;
 }
 
 @media (max-width: 768px) {
