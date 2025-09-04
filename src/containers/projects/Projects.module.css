@@ -1,51 +1,88 @@
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
 .header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .title {
-  font-size: 1.75rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
 }
 
 .subtitle {
   color: var(--primary-light);
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.swiperWrapper {
+  position: relative;
+  max-width: 1280px;
+  width: 100%;
+  padding-bottom: 48px;
+  margin: 0 auto;
+  z-index: 2;
+  cursor: grab;
+}
+
+.swiperContainer {
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 .projectsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
   padding: 0 1rem;
-  margin-bottom: 0.5rem;
-  cursor: grab;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .projectCard {
   background: var(--base);
-  border-radius: 0.625rem;
+  border-radius: 1rem;
   overflow: hidden;
   border: 1px solid var(--primary-light);
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-out;
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 100%;
-  /* Evita que os cartões fiquem muito largos */
+  perspective: 1200px;
+  will-change: transform;
+  transform-style: preserve-3d;
+  cursor: default;
 }
 
 .projectCard:hover {
-  transform: translateY(-0.3125rem);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Demais estilos mantidos sem alterações */
 .imageWrapper {
   position: relative;
   height: 10rem;
@@ -57,7 +94,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease-in-out;
 }
 
 .imageOverlay {
@@ -66,12 +103,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .imageWrapper:hover .imageOverlay {
@@ -79,20 +116,24 @@
 }
 
 .imageWrapper:hover .projectImage {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .zoomIcon {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   color: var(--accent);
-  font-size: 2rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.imageWrapper:hover .zoomIcon {
+  transform: scale(1.2);
 }
 
 .lockIcon {
   color: var(--text-base);
-  margin-right: 0.4rem;
+  margin-right: 0.5rem;
   vertical-align: middle;
 }
 
@@ -118,17 +159,17 @@
 }
 
 .projectYear {
-  background: var(--primary-light);
+  background: var(--primary);
   color: var(--base);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  padding: 0.2rem 0.6rem;
-  border-radius: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
 }
 
 .projectDescription {
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 0.75rem;
   font-size: 0.875rem;
   flex: 1;
@@ -137,17 +178,22 @@
 .tagsContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .projectTag {
-  background: rgba(var(--primary-rgb), 0.1);
+  background: rgba(var(--primary-rgb), 0.15);
   color: var(--primary);
   font-size: 0.75rem;
   font-family: 'IBM Plex Mono', monospace;
-  padding: 0.3rem 0.7rem;
-  border-radius: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.projectTag:hover {
+  background: rgba(var(--primary-rgb), 0.25);
 }
 
 .projectLinks {
@@ -164,11 +210,11 @@
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 .demoButton {
@@ -178,53 +224,55 @@
 
 .demoButton:hover {
   background: var(--primary-dark);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .codeButton {
-  background: rgba(var(--primary-rgb), 0.1);
+  background: transparent;
   color: var(--primary);
-  border: 1px solid var(--primary-light);
+  border: 1px solid var(--primary);
 }
 
 .codeButton:hover {
-  background: rgba(var(--primary-rgb), 0.2);
-  transform: translateY(-1px);
+  background: rgba(var(--primary-rgb), 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .privateButton {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.1);
   color: var(--text-muted);
   border: 1px solid var(--border-color);
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .tooltip {
   position: relative;
-  cursor: default;
 }
 
 .tooltip::after {
-  background-color: var(--primary);
-  color: var(--text-base);
+  background-color: var(--primary-dark);
+  color: var(--base);
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 125%;
+  bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   pointer-events: none;
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   z-index: 1000;
 }
 
 .tooltip:hover::after {
   opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
 }
 
 .modalOverlay {
@@ -233,12 +281,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  touch-action: none;
+  backdrop-filter: blur(4px);
 }
 
 .imageModalContent {
@@ -249,36 +297,42 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  touch-action: none;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .closeButton {
-  background: none;
-  color: var(--primary-light);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--primary);
   position: absolute;
   top: -40px;
   right: 0;
   border: none;
   font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   cursor: pointer;
-  transition: color 0.2s;
-  z-index: 1001;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .closeButton:hover {
-  color: var(--primary);
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
 }
 
 .modalImageContainer {
-  flex: 1;
+  max-height: 100vh;
+  flex: 1 1;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  max-height: 80vh;
-  transition: transform 0.2s ease-out;
+  transition: transform .2s ease-out;
   transform-origin: center center;
   will-change: transform;
 }
@@ -287,9 +341,14 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   user-select: none;
   -webkit-user-drag: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.modalImageContainer.zoomed .modalImage {
+  object-fit: none;
 }
 
 .imageModalFooter {
@@ -298,40 +357,79 @@
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
-  padding: 1rem 0 0;
+  padding: 0.75rem 0 0;
 }
 
 .imageModalFooter h3 {
   color: var(--text-base);
   margin: 0;
   font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.footerControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.zoomButton {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--primary);
+  border: none;
+  padding: 0.4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.zoomButton:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+.zoomButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .zoomIndicator {
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
   font-size: 0.875rem;
-  margin-top: 0.5rem;
+}
+
+.downloadButton {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--primary);
+  padding: 0.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.downloadButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
 }
 
 .zoomHint {
   color: var(--text-muted);
-  font-size: 0.8rem;
-  text-align: center;
+  font-size: 0.75rem;
   margin-top: 0.5rem;
-}
-
-.swiperWrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 40px;
-}
-
-.swiperContainer {
-  width: 100%;
-  margin-bottom: 20px;
+  opacity: 0.8;
 }
 
 .swiperPagination {
@@ -339,22 +437,22 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 20px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   z-index: 10;
 }
 
 .bullet {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 .bulletActive {
@@ -362,74 +460,57 @@
   transform: scale(1.2);
 }
 
-@media (max-width: 1190px) {
+/* ---- responsive ---- */
+@media (max-width: 1024px) {
+  .swiperWrapper {
+    margin: 3rem auto;
+  }
+
   .projectsGrid {
-    grid-template-columns: repeat(2, minmax(18rem, 1fr));
-    gap: 2.25rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .projectCard {
+    max-width: 100%;
+  }
+
+  .imageWrapper {
+    height: 9rem;
+  }
+
+  .projectTitle {
+    font-size: 1.0625rem;
+  }
+
+  .projectDescription {
+    font-size: 0.8125rem;
+  }
+
+  .projectButton {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
   }
 }
 
 @media (max-width: 768px) {
-  .projectsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-    gap: 1rem;
-  }
-
   .swiperWrapper {
-    padding-bottom: 30px;
-  }
-
-  .bullet {
-    width: 8px;
-    height: 8px;
-  }
-
-  .imageModalContent {
-    padding: 0.5rem;
-    width: 95%;
-    height: 95%;
-  }
-
-  .closeButton {
-    top: -45px;
-    right: -5px;
-    font-size: 2.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-
-  .modalImageContainer {
-    max-height: 75vh;
-  }
-
-  .projectLinks {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header {
-    margin-bottom: 1.25rem;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.8125rem;
+    margin: 2rem auto;
   }
 
   .projectsGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
     padding: 0 0.75rem;
+  }
+
+  .projectCard {
+    transform: none !important;
+  }
+
+  .imageWrapper {
+    height: 8rem;
   }
 
   .cardContent {
@@ -437,19 +518,164 @@
   }
 
   .projectTitle {
-    font-size: 1.0625rem;
+    font-size: 1rem;
   }
 
-  .imageModalFooter h3 {
-    font-size: 1.1rem;
+  .projectYear {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .projectDescription {
+    font-size: 0.75rem;
+  }
+
+  .projectTag {
+    font-size: 0.6875rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .projectLinks {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .projectButton {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .imageModalContent {
+    padding: 0.75rem;
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .closeButton {
+    top: -36px;
+    right: 0;
+    font-size: 1.75rem;
+    width: 36px;
+    height: 36px;
   }
 
   .modalImageContainer {
     max-height: 70vh;
   }
 
+  .imageModalFooter h3 {
+    font-size: 1.125rem;
+  }
+
+  .zoomControls {
+    gap: 0.5rem;
+  }
+
+  .zoomButton {
+    padding: 0.3rem;
+  }
+
   .zoomIndicator {
     font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .zoomHint {
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .swiperWrapper {
+    margin: 1.5rem auto;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .imageWrapper {
+    height: 7rem;
+  }
+
+  .cardContent {
+    padding: 0.75rem;
+  }
+
+  .projectTitle {
+    font-size: 0.9375rem;
+  }
+
+  .projectYear {
+    font-size: 0.6875rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .projectDescription {
+    font-size: 0.6875rem;
+  }
+
+  .projectTag {
+    font-size: 0.625rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .projectButton {
+    font-size: 0.6875rem;
+    padding: 0.4rem;
+  }
+
+  .imageModalContent {
+    padding: 0.5rem;
+    width: 95%;
+  }
+
+  .modalImageContainer {
+    max-height: 65vh;
+  }
+
+  .imageModalFooter h3 {
+    font-size: 1rem;
+  }
+
+  .zoomControls {
+    gap: 0.4rem;
+  }
+
+  .zoomButton {
+    padding: 0.25rem;
+  }
+
+  .zoomIndicator {
+    font-size: 0.6875rem;
     padding: 0.2rem 0.4rem;
+  }
+
+  .zoomHint {
+    font-size: 0.625rem;
+  }
+
+  .swiperPagination {
+    height: 20px;
+    gap: 8px;
+  }
+
+  .bullet {
+    width: 8px;
+    height: 8px;
   }
 }

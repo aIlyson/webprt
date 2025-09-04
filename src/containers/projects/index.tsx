@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Section, Title } from "../../common/components/index";
 import { motion } from "framer-motion";
 import styles from "./Projects.module.css";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import { Lock, Search } from "lucide-react";
+import { Pagination, Autoplay } from "swiper/modules";
+import { Lock, Search, ZoomIn, ZoomOut, Download } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -42,7 +42,7 @@ const projects: Project[] = [
     year: "2025",
     image: "/assets/casiufpi.site_.png",
     links: {
-      demo: "https://casiufpi.site/",
+      demo: "https://casi-oftf.onrender.com/",
       code: "#private",
     },
   },
@@ -54,15 +54,15 @@ const projects: Project[] = [
     year: "2025",
     image: "/assets/juasolucoes.site.png",
     links: {
-      demo: "#private",
+      demo: "https://www.juasolucoes.com.br/",
       code: "#private",
     },
   },
   {
     title: "CTBJ-Study",
     description:
-      "Desenvolvimento de um catálogo digital para disciplinas do Colégio Técnico.",
-    tags: ["React", "Chart.js", "Node.js", "MongoDB"],
+      "Desenvolvimento de um catálogo digital para disciplinas e conteúdos do Colégio Técnico.",
+    tags: ["React", "Node.js", "MongoDB"],
     year: "2024",
     image: "/assets/ctbj-study.onrender.png",
     links: {
@@ -71,9 +71,33 @@ const projects: Project[] = [
     },
   },
   {
+    title: "AedesInfo",
+    description:
+      "Desenvolvimento de um app para a Prefeitura de Ouricuri monitorar focos do Aedes aegypti.",
+    tags: ["React Native", "Firebase", "Redux"],
+    year: "2023",
+    image: "/assets/aedesinfo.png",
+    links: {
+      demo: "#private",
+      code: "https://github.com/aIlyson/AedesInfo",
+    },
+  },
+  {
+    title: "Sinfo 2025",
+    description:
+      "Desenvolvimento do site do Sinfo com autenticação e avaliação integrada de submissões.",
+    tags: ["Node.js", "Typescript", "PostgreSQL", "Nginx"],
+    year: "2025",
+    image: "/assets/sinfo-ufpi.com.br_.png",
+    links: {
+      demo: "https://sinfo-ufpi.com.br/",
+      code: "#private",
+    },
+  },
+  {
     title: "ENAMO 2024",
     description:
-      "Desenvolvimento do site do ENAMO com sistema de inscrições e programação.",
+      "Desenvolvimento do site do ENAMO com inscrições e programação detalhada de eventos.",
     tags: ["Node.js", "Handlebars", "Tailwind"],
     year: "2024",
     image: "/assets/enamo2024.ouricuri.png",
@@ -83,15 +107,15 @@ const projects: Project[] = [
     },
   },
   {
-    title: "AedesInfo",
+    title: "Método Irresistível",
     description:
-      "Desenvolvimento de um app para a Prefeitura de Ouricuri monitorar o Aedes aegypti.",
-    tags: ["React Native", "Firebase", "Redux"],
-    year: "2024",
-    image: "/assets/aedesinfo.png",
+      "Desenvolvimento de landing page para divulgação e promoção de curso sobre nutrição.",
+    tags: ["Vue.js", "Node.js"],
+    year: "2025",
+    image: "/assets/metodoirresistivel.online_.png",
     links: {
-      demo: "#private",
-      code: "https://github.com/aIlyson/AedesInfo",
+      demo: "https://www.metodoirresistivel.online/",
+      code: "#private",
     },
   },
   {
@@ -107,7 +131,31 @@ const projects: Project[] = [
     },
   },
   {
-    title: "Este Site",
+    title: "Controle de vendas de café",
+    description:
+      "Desenvolvimento de um aplicativo para o gerenciamento das vendas de café no Centro Acadêmico.",
+    tags: ["Kotlin", "Excel"],
+    year: "2025",
+    image: "/assets/noimage.png",
+    links: {
+      demo: "#private",
+      code: "#private",
+    },
+  },
+  {
+    title: "Rádio Lofi",
+    description:
+      "Desenvolvimento de uma aplicação web de rádio lofi, integrada com APIs do Spotify e YouTube.",
+    tags: ["Angular", "TypeScript", "Spotify/YouTube API"],
+    year: "2025",
+    image: "/assets/radioLofi.png",
+    links: {
+      demo: "#private",
+      code: "#private",
+    },
+  },
+  {
+    title: "Este site",
     description:
       "Meu site portfólio para apresentação sobre mim, de projetos e habilidades.",
     tags: ["React", "Next.js", "Framer Motion"],
@@ -128,6 +176,197 @@ const chunkProjects = (projects: Project[], size: number) => {
   return chunks;
 };
 
+const MotionDiv = motion.div;
+
+const ProjectCard: React.FC<{
+  project: Project;
+  index: number;
+  handleImageClick: (project: Project, e: React.MouseEvent) => void;
+}> = ({ project, index, handleImageClick }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (cardRef.current && window.innerWidth > 768) {
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const maxTilt = 6;
+      const tiltX = ((centerY - y) / (centerY * 0.8)) * maxTilt;
+      const tiltY = ((x - centerX) / (centerX * 0.8)) * maxTilt;
+
+      cardRef.current.style.transform = `
+        perspective(1200px)
+        rotateX(${tiltX}deg)
+        rotateY(${tiltY}deg)
+        scale(1.02)
+      `;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (cardRef.current) {
+        const relatedTarget = e.relatedTarget as Node;
+        if (
+          relatedTarget instanceof Node &&
+          cardRef.current.contains(relatedTarget)
+        ) {
+          return;
+        }
+        cardRef.current.style.transform = `
+        perspective(1200px)
+        rotateX(0deg)
+        rotateY(0deg)
+        scale(1)
+      `;
+      }
+    },
+    []
+  );
+
+  return (
+    <MotionDiv
+      ref={cardRef}
+      className={styles.projectCard}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -30px 0px" }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        className={styles.imageWrapper}
+        onClick={(e) => handleImageClick(project, e)}
+      >
+        <Image
+          src={project.image}
+          alt={project.title}
+          width={280}
+          height={160}
+          className={styles.projectImage}
+          quality={90}
+          priority={index < 4}
+        />
+        <div className={styles.imageOverlay}>
+          <Search className={styles.zoomIcon} size={30} strokeWidth={2} />
+        </div>
+      </div>
+
+      <div className={styles.cardContent}>
+        <div className={styles.cardHeader}>
+          <motion.h3
+            className={styles.projectTitle}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 + 0.1, duration: 0.4 }}
+          >
+            {project.title}
+          </motion.h3>
+          <motion.span
+            className={styles.projectYear}
+            initial={{ opacity: 0, x: 10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 + 0.15, duration: 0.4 }}
+          >
+            {project.year}
+          </motion.span>
+        </div>
+
+        <motion.p
+          className={styles.projectDescription}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 + 0.2, duration: 0.4 }}
+        >
+          {project.description}
+        </motion.p>
+
+        <MotionDiv
+          className={styles.tagsContainer}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {project.tags.map((tag, i) => (
+            <motion.span
+              key={i}
+              className={styles.projectTag}
+              variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 },
+              }}
+              whileHover={{ scale: 1.05 }}
+            >
+              {tag}
+            </motion.span>
+          ))}
+        </MotionDiv>
+
+        <motion.div
+          className={styles.projectLinks}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
+        >
+          {project.links.demo === "#private" ? (
+            <button
+              className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
+              disabled
+              data-tooltip="Demo privada :c"
+            >
+              <Lock size={16} className={styles.lockIcon} /> Demo
+            </button>
+          ) : (
+            <motion.a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.projectButton} ${styles.demoButton}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Demo
+            </motion.a>
+          )}
+
+          {project.links.code === "#private" ? (
+            <button
+              className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
+              disabled
+              data-tooltip="Repositório privado :c"
+            >
+              <Lock size={16} className={styles.lockIcon} /> Código
+            </button>
+          ) : (
+            <motion.a
+              href={project.links.code}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.projectButton} ${styles.codeButton}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Código
+            </motion.a>
+          )}
+        </motion.div>
+      </div>
+    </MotionDiv>
+  );
+};
+
 const Projects: React.FC = () => {
   const projectChunks = chunkProjects(projects, 4);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -135,118 +374,160 @@ const Projects: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [startTouch, setStartTouch] = useState({ x: 0, y: 0 });
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [pinchDistance, setPinchDistance] = useState(0);
   const imageRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const lastTapRef = useRef(0);
 
-  const handleImageClick = (project: Project, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setSelectedProject(project);
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-    setIsZoomed(false);
-  };
+  const handleImageClick = useCallback(
+    (project: Project, e: React.MouseEvent) => {
+      e.stopPropagation();
+      setSelectedProject(project);
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+    },
+    []
+  );
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setSelectedProject(null);
     setScale(1);
     setPosition({ x: 0, y: 0 });
-    setIsZoomed(false);
-  };
+    setIsDragging(false);
+  }, []);
 
-  const handleZoom = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!imageRef.current) return;
+  const handleZoom = useCallback(
+    (newScale: number, clientX?: number, clientY?: number) => {
+      if (!imageRef.current) return;
 
-    const rect = imageRef.current.getBoundingClientRect();
-    let clientX, clientY;
+      const rect = imageRef.current.getBoundingClientRect();
+      const offsetX = clientX ? clientX - rect.left : rect.width / 2;
+      const offsetY = clientY ? clientY - rect.top : rect.height / 2;
 
-    if ("touches" in e) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-      e.preventDefault();
-    } else {
-      clientX = e.clientX;
-      clientY = e.clientY;
-    }
+      const clampedScale = Math.max(1, Math.min(newScale, 3));
+      const newX =
+        clampedScale === 1
+          ? 0
+          : -(offsetX - rect.width / 2) * (clampedScale - 1);
+      const newY =
+        clampedScale === 1
+          ? 0
+          : -(offsetY - rect.height / 2) * (clampedScale - 1);
 
-    const offsetX = clientX - rect.left;
-    const offsetY = clientY - rect.top;
+      setScale(clampedScale);
+      setPosition({ x: newX, y: newY });
+    },
+    []
+  );
 
-    const newScale = scale === 1 ? 2 : 1;
-    const newX =
-      newScale === 1 ? 0 : -(offsetX - rect.width / 2) * (newScale - 1);
-    const newY =
-      newScale === 1 ? 0 : -(offsetY - rect.height / 2) * (newScale - 1);
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (scale <= 1) return;
+      setIsDragging(true);
+      setStartTouch({ x: e.clientX, y: e.clientY });
+    },
+    [scale]
+  );
 
-    setScale(newScale);
-    setPosition({ x: newX, y: newY });
-    setIsZoomed(newScale > 1);
-  };
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging || scale <= 1) return;
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (scale <= 1) return;
-    setIsDragging(true);
-  };
+      setPosition((prev) => ({
+        x: clampPosition(prev.x + e.movementX, scale),
+        y: clampPosition(prev.y + e.movementY, scale),
+      }));
+    },
+    [isDragging, scale]
+  );
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || scale <= 1) return;
-
-    setPosition((prev) => ({
-      x: clampPosition(prev.x + e.movementX, scale),
-      y: clampPosition(prev.y + e.movementY, scale),
-    }));
-  };
-
-  const clampPosition = (value: number, currentScale: number) => {
+  const clampPosition = useCallback((value: number, currentScale: number) => {
     if (!imageRef.current) return value;
     const maxMovement = ((currentScale - 1) * imageRef.current.clientWidth) / 2;
     return Math.max(-maxMovement, Math.min(maxMovement, value));
-  };
+  }, []);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const now = Date.now();
-    const DOUBLE_TAP_DELAY = 300;
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const distance = Math.hypot(
+          touch1.clientX - touch2.clientX,
+          touch1.clientY - touch2.clientY
+        );
+        setPinchDistance(distance);
+      } else if (e.touches.length === 1) {
+        const now = Date.now();
+        const DOUBLE_TAP_DELAY = 300;
 
-    if (now - lastTapRef.current < DOUBLE_TAP_DELAY) {
-      handleZoom(e);
-      lastTapRef.current = 0;
-    } else {
-      lastTapRef.current = now;
+        if (now - lastTapRef.current < DOUBLE_TAP_DELAY) {
+          handleZoom(
+            scale === 1 ? 2 : 1,
+            e.touches[0].clientX,
+            e.touches[0].clientY
+          );
+          lastTapRef.current = 0;
+        } else {
+          lastTapRef.current = now;
+          if (scale > 1) {
+            setStartTouch({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+          }
+        }
+      }
+    },
+    [scale, handleZoom]
+  );
 
-      if (scale > 1) {
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const touch1 = e.touches[0];
+        const touch2 = e.touches[1];
+        const newDistance = Math.hypot(
+          touch1.clientX - touch2.clientX,
+          touch1.clientY - touch2.clientY
+        );
+        if (pinchDistance > 0) {
+          const zoomFactor = newDistance / pinchDistance;
+          handleZoom(
+            scale * zoomFactor,
+            (touch1.clientX + touch2.clientX) / 2,
+            (touch1.clientY + touch2.clientY) / 2
+          );
+        }
+        setPinchDistance(newDistance);
+      } else if (e.touches.length === 1 && scale > 1) {
+        e.preventDefault();
         const touch = e.touches[0];
+        setPosition((prev) => ({
+          x: clampPosition(prev.x + (touch.clientX - startTouch.x), scale),
+          y: clampPosition(prev.y + (touch.clientY - startTouch.y), scale),
+        }));
         setStartTouch({ x: touch.clientX, y: touch.clientY });
       }
-    }
-  };
+    },
+    [scale, pinchDistance, startTouch, handleZoom, clampPosition]
+  );
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (scale <= 1) return;
-    e.preventDefault();
+  const handleTouchEnd = useCallback(() => {
+    setPinchDistance(0);
+    setIsDragging(false);
+  }, []);
 
-    const touch = e.touches[0];
-    setPosition((prev) => ({
-      x: clampPosition(prev.x + (touch.clientX - startTouch.x), scale),
-      y: clampPosition(prev.y + (touch.clientY - startTouch.y), scale),
-    }));
-    setStartTouch({ x: touch.clientX, y: touch.clientY });
-  };
+  const handleZoomIn = useCallback(() => {
+    handleZoom(Math.min(scale + 0.5, 3));
+  }, [scale, handleZoom]);
 
-  const handleTouchEnd = () => {
-    if (!isZoomed) {
-      closeModal();
-    }
-  };
-
-  const handleDoubleClick = (e: React.MouseEvent) => {
-    handleZoom(e);
-  };
+  const handleZoomOut = useCallback(() => {
+    handleZoom(Math.max(scale - 0.5, 1));
+  }, [scale, handleZoom]);
 
   useEffect(() => {
     if (selectedProject) {
@@ -272,16 +553,46 @@ const Projects: React.FC = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [selectedProject]);
+  }, [selectedProject, closeModal]);
 
   return (
     <Section
       id="projects"
       bg="surface"
       withPixels={true}
-      pixelCount={10}
+      pixelCount={15}
       padding="lg"
     >
+      <div className={styles.particles}>
+        {[...Array(15)].map((_, i) => (
+          <MotionDiv
+            key={i}
+            className={styles.particle}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: [0.3, 0.6, 0.3],
+              y: [0, -20, 0],
+              x: [0, Math.random() * 10 - 5, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: i * 0.2,
+            }}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 5 + 3}px`,
+              height: `${Math.random() * 5 + 3}px`,
+              backgroundColor:
+                i % 3 === 0 ? "var(--accent)" : "var(--primary-light)",
+              borderRadius: i % 4 === 0 ? "50%" : "2px",
+            }}
+          />
+        ))}
+      </div>
+
       <div className={styles.header}>
         <Title level={2} withBrackets align="center">
           Projetos
@@ -299,112 +610,31 @@ const Projects: React.FC = () => {
 
       <div className={styles.swiperWrapper}>
         <Swiper
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           pagination={{
             clickable: true,
             el: `.${styles.swiperPagination}`,
             bulletClass: styles.bullet,
             bulletActiveClass: styles.bulletActive,
           }}
-          spaceBetween={30}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
+          }}
+          spaceBetween={20}
           className={styles.swiperContainer}
         >
           {projectChunks.map((chunk, chunkIndex) => (
             <SwiperSlide key={chunkIndex}>
               <div className={styles.projectsGrid}>
                 {chunk.map((project, index) => (
-                  <motion.div
+                  <ProjectCard
                     key={`${chunkIndex}-${index}`}
-                    className={styles.projectCard}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "0px 0px -30px 0px" }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    <div
-                      className={styles.imageWrapper}
-                      onClick={(e) => handleImageClick(project, e)}
-                    >
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        width={280}
-                        height={160}
-                        className={styles.projectImage}
-                        quality={90}
-                        priority={index < 4}
-                      />
-                      <div className={styles.imageOverlay}>
-                        <Search
-                          className={styles.zoomIcon}
-                          size={30}
-                          strokeWidth={2}
-                        />
-                      </div>
-                    </div>
-
-                    <div className={styles.cardContent}>
-                      <div className={styles.cardHeader}>
-                        <h3 className={styles.projectTitle}>{project.title}</h3>
-                        <span className={styles.projectYear}>
-                          {project.year}
-                        </span>
-                      </div>
-
-                      <p className={styles.projectDescription}>
-                        {project.description}
-                      </p>
-
-                      <div className={styles.tagsContainer}>
-                        {project.tags.map((tag, i) => (
-                          <span key={i} className={styles.projectTag}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className={styles.projectLinks}>
-                        {project.links.demo === "#private" ? (
-                          <button
-                            className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
-                            disabled
-                            data-tooltip="Demo privada :c"
-                          >
-                            <Lock size={16} className={styles.lockIcon} /> Demo
-                          </button>
-                        ) : (
-                          <a
-                            href={project.links.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`${styles.projectButton} ${styles.demoButton}`}
-                          >
-                            Demo
-                          </a>
-                        )}
-
-                        {project.links.code === "#private" ? (
-                          <button
-                            className={`${styles.projectButton} ${styles.privateButton} ${styles.tooltip}`}
-                            disabled
-                            data-tooltip="Repositório privado :c"
-                          >
-                            <Lock size={16} className={styles.lockIcon} />{" "}
-                            Código
-                          </button>
-                        ) : (
-                          <a
-                            href={project.links.code}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`${styles.projectButton} ${styles.codeButton}`}
-                          >
-                            Código
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  </motion.div>
+                    project={project}
+                    index={index}
+                    handleImageClick={handleImageClick}
+                  />
                 ))}
               </div>
             </SwiperSlide>
@@ -415,8 +645,11 @@ const Projects: React.FC = () => {
       </div>
 
       {selectedProject && (
-        <div
+        <motion.div
           className={styles.modalOverlay}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               closeModal();
@@ -424,8 +657,12 @@ const Projects: React.FC = () => {
           }}
           ref={modalRef}
         >
-          <div
+          <motion.div
             className={styles.imageModalContent}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -438,8 +675,6 @@ const Projects: React.FC = () => {
             <div
               ref={imageRef}
               className={styles.modalImageContainer}
-              onClick={isZoomed ? undefined : handleZoom}
-              onDoubleClick={handleDoubleClick}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
@@ -450,14 +685,15 @@ const Projects: React.FC = () => {
               style={{
                 transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
                 cursor:
-                  scale > 1 ? (isDragging ? "grabbing" : "grab") : "zoom-in",
-                touchAction: scale > 1 ? "none" : "auto",
+                  scale > 1 ? (isDragging ? "grabbing" : "grab") : "default",
+                touchAction: "none",
+                transition: scale > 1 ? "none" : "transform 0.2s ease-out",
               }}
             >
               <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}
-                width={800}
+                width={1280}
                 height={450}
                 className={styles.modalImage}
                 priority
@@ -465,17 +701,50 @@ const Projects: React.FC = () => {
             </div>
             <div className={styles.imageModalFooter}>
               <h3>{selectedProject.title}</h3>
-              <div className={styles.zoomIndicator}>
-                {Math.round(scale * 100)}%
+              <div className={styles.footerControls}>
+                <div className={styles.zoomControls}>
+                  <button
+                    className={styles.zoomButton}
+                    onClick={handleZoomOut}
+                    disabled={scale <= 1}
+                    aria-label="Reduzir zoom"
+                  >
+                    <ZoomOut size={20} />
+                  </button>
+                  <span className={styles.zoomIndicator}>
+                    {Math.round(scale * 100)}%
+                  </span>
+                  <button
+                    className={styles.zoomButton}
+                    onClick={handleZoomIn}
+                    disabled={scale >= 3}
+                    aria-label="Aumentar zoom"
+                  >
+                    <ZoomIn size={20} />
+                  </button>
+                </div>
+                {selectedProject.image !== "/assets/noimage.png" && (
+                  <a
+                    href={selectedProject.image}
+                    download={`${selectedProject.title.replace(
+                      /\s+/g,
+                      "_"
+                    )}.png`}
+                    className={styles.downloadButton}
+                    aria-label="Baixar imagem"
+                  >
+                    <Download size={20} />
+                  </a>
+                )}
               </div>
-              {isZoomed && (
+              {scale > 1 && (
                 <p className={styles.zoomHint}>
-                  Arraste para mover | Toque duas vezes para reduzir
+                  Arraste para mover | Pinch para zoom
                 </p>
               )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </Section>
   );

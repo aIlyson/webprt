@@ -180,6 +180,63 @@
   opacity: 1;
 }
 
+.resumeButton {
+  background: transparent;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.resumeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resumeButtonBorder {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.resumeButton:hover .resumeButtonBorder {
+  opacity: 1;
+}
+
+.resumeButtonWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.resumePopup {
+  background: var(--background-color);
+  color: var(--text-color);
+  position: absolute;
+  top: 50px;
+  right: 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
 .mobileMenuButton {
   background: none;
   position: relative;
@@ -368,6 +425,14 @@
 
   .navContainer {
     padding: 0 1rem;
+  }
+
+  .resumeButtonWrapper {
+    display: none !important;
+  }
+
+  .resumePopup {
+    display: none;
   }
 }
 
