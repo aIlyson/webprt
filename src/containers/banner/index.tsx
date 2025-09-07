@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "./Banner.module.css";
@@ -7,6 +7,7 @@ import {
   LinkedInIcon,
   InstagramIcon,
 } from "../../common/svg/SocialIcons";
+import TechTooltip from "./TechTooltip";
 
 const MotionDiv = motion.div;
 const MotionH1 = motion.h1;
@@ -51,6 +52,17 @@ const Banner = () => {
   };
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
+  const [bgImageLoaded, setBgImageLoaded] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const img = document.createElement("img");
+      img.src =
+        "../../../public/staticImagesha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==.webp";
+      img.onload = () => setBgImageLoaded(true);
+      img.onerror = () => setBgImageLoaded(false);
+    }
+  }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (imageContainerRef.current) {
@@ -99,7 +111,11 @@ const Banner = () => {
 
   return (
     <div id="home">
-      <MotionDiv className={styles.banner} initial="hidden" animate="visible">
+      <MotionDiv
+        className={`${styles.banner} ${!bgImageLoaded ? styles.noBgImage : ""}`}
+        initial="hidden"
+        animate="visible"
+      >
         <div className={styles.particles}>
           {[...Array(15)].map((_, i) => (
             <MotionDiv
@@ -156,8 +172,19 @@ const Banner = () => {
                 </span>{" "}
                 em desenvolver projetos que possam ser úteis e páginas web.
                 Atualmente em uma pesquisa e já participei de um projeto de
-                extensão pelo IFSertãoPE, e procuro me especializar mais em
-                JavaScript, Ruby e Python.
+                extensão pelo IFSertãoPE, e procuro me especializar mais em{" "}
+                <TechTooltip tech="javascript">
+                  <span className={styles.techHighlight}>JavaScript</span>
+                </TechTooltip>
+                ,{" "}
+                <TechTooltip tech="ruby">
+                 <span className={styles.techHighlight}>Ruby</span>
+                </TechTooltip>{" "}
+                e{" "}
+                <TechTooltip tech="python">
+                  <span className={styles.techHighlight}>Python</span>
+                </TechTooltip>
+                .
               </MotionP>
             </MotionDiv>
 

@@ -1,5 +1,5 @@
 .contactContainer {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 1rem;
   overflow: hidden;
@@ -22,8 +22,15 @@
   background: var(--base-surface);
   font-family: 'Fira Code', monospace;
   border-radius: 8px;
+  box-shadow: 0 0 15px var(--container-shadow);
   border: 1px solid var(--primary-dark);
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.codePanel:hover {
+  scale: 1.02;
+  box-shadow: 0 0 20px var(--container-shadow);
 }
 
 .codeHeader {
@@ -39,7 +46,12 @@
   height: 12px;
   border-radius: 50%;
   margin-right: 6px;
+  transition: all 0.3s ease;
 }
+
+.codeDot:hover {
+  transform: scale(1.2);
+ }
 
 .codeTitle {
   color: var(--text-muted);
@@ -110,6 +122,7 @@
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid var(--primary-dark);
+  box-shadow: 0 0 5px var(--container-shadow);
   transition: all 0.3s ease;
 }
 
@@ -127,6 +140,7 @@
 .submitButton {
   align-self: flex-start;
   margin-top: 1rem;
+  box-shadow: 0 0 5px var(--container-shadow);
 }
 
 .errorMessage {
@@ -143,7 +157,7 @@
   color: #2E7D32;
   margin-bottom: 16px;
   padding: 12px;
-  border-radius: 4px;  
+  border-radius: 4px;
   border-left: 3px solid #2E7D32;
 }
 

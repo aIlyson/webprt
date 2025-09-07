@@ -19,6 +19,11 @@ export default function Document() {
           rel="stylesheet"
         />
         <link rel="icon" href="../../icon.png" type="image/png" />
+        <link
+          rel="preload"
+          href="../../staticImagesha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==.webp"
+          as="image"
+        />{" "}
         <meta name="description" content="Alysson Michel portfolio page" />
       </Head>
       <body>

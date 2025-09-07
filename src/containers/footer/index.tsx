@@ -26,6 +26,7 @@ const Footer: React.FC = () => {
         <div className={styles.links}>
           <MotionLink
             href="https://github.com/aIlyson"
+            target="_blank"
             className={styles.link}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
