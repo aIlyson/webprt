@@ -7,7 +7,7 @@ import {
   LinkedInIcon,
   InstagramIcon,
 } from "../../common/svg/SocialIcons";
-import TechTooltip from "./TechTooltip";
+import TechTooltip from "../../common/components/TechTooltip";
 
 const MotionDiv = motion.div;
 const MotionH1 = motion.h1;
@@ -167,7 +167,7 @@ const Banner = () => {
 
             <MotionDiv variants={itemVariants}>
               <MotionP className={styles.description}>
-                <span className={styles.tooltip} data-tooltip="por cacheadas!">
+                <span className={styles.tooltip} data-tooltip="por Nier: Automata!">
                   Apaixonado
                 </span>{" "}
                 em desenvolver projetos que possam ser úteis e páginas web.

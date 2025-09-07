@@ -51,7 +51,7 @@
 
 .codeDot:hover {
   transform: scale(1.2);
- }
+}
 
 .codeTitle {
   color: var(--text-muted);
@@ -140,7 +140,21 @@
 .submitButton {
   align-self: flex-start;
   margin-top: 1rem;
-  box-shadow: 0 0 5px var(--container-shadow);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--container-shadow);
+  }
+
+  50% {
+    box-shadow: 0 0 35px var(--primary-glow), 0 0 45px var(--secondary-glow);
+  }
 }
 
 .errorMessage {

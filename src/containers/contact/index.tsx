@@ -97,8 +97,8 @@ const Contact: React.FC = () => {
       return;
     }
 
-    if (formData.message.length > 2000) {
-      setError("Mensagem muito longa (máx. 2000 caracteres)");
+    if (formData.message.length > 5000) {
+      setError("Mensagem muito longa (máx. 5000 caracteres)");
       return;
     }
 
@@ -280,7 +280,7 @@ const Contact: React.FC = () => {
                 aria-required="true"
               />
               <div className={styles.charCount}>
-                {formData.message.length}/2000 caracteres
+                {formData.message.length}/5000 caracteres
               </div>
             </div>
 

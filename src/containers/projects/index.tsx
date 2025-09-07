@@ -160,9 +160,9 @@ const projects: Project[] = [
       "Meu site portfólio para apresentação sobre mim, de projetos e habilidades.",
     tags: ["React", "Next.js", "Framer Motion"],
     year: "2023",
-    image: "/assets/portf.png",
+    image: "/assets/allysonms.tech.png",
     links: {
-      demo: "https://allysonms.site/",
+      demo: "https://allysonms.tech/",
       code: "https://github.com/aIlyson/webprt",
     },
   },

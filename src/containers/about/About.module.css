@@ -31,11 +31,30 @@
   color: var(--primary);
 }
 
+
+.techHighlight {
+  display: inline-block;
+  position: relative;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.techHighlight:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tech-tooltip-container {
+  line-height: normal;
+} 
+
 .skillsColumn {
   background: rgba(var(--primary-rgb), 0.03);
   border-radius: 0.75rem;
   padding: 1.5rem;
   border: 1px solid var(--primary-light);
+  box-shadow: 0 0 10px var(--container-shadow);
 }
 
 .skillsTitle {
@@ -72,13 +91,39 @@
 
 .skillBar {
   background: var(--primary-light);
+  position: relative;
   height: 0.475rem;
   border-radius: 0.1875rem;
   overflow: hidden;
 }
 
+.skillBar::after {
+  background: linear-gradient(to right,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  animation: lightFlow 4s infinite linear;
+  animation-delay: 3s;
+}
+
+@keyframes lightFlow {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
 .skillLevel {
-  background: var(--primary);
+  background: var(--primary-dark);
   height: 100%;
   border-radius: 0.1875rem;
 }
@@ -90,11 +135,11 @@
     gap: 1.5rem;
     margin-top: 1.5rem;
   }
-  
+
   .skillsColumn {
     padding: 1.25rem;
   }
-  
+
   .highlight {
     font-size: 1.125rem;
   }
@@ -104,15 +149,15 @@
   .aboutContainer {
     padding: 0 1.25rem;
   }
-  
+
   .textColumn {
     font-size: 0.9375rem;
   }
-  
+
   .highlight {
     font-size: 1.0625rem;
   }
-  
+
   .skillsTitle {
     font-size: 0.9375rem;
     margin-bottom: 1.25rem;

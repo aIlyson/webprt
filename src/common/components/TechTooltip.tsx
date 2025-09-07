@@ -4,10 +4,14 @@ import {
   RubyIcon,
   JavaScriptIcon,
   PythonIcon,
+  NodeJSIcon,
+  ExpressIcon,
+  JavaIcon,
+  InstitutoFederalIcon,
 } from "../../common/svg/TechIcons";
 
 interface TechTooltipProps {
-  tech: "ruby" | "javascript" | "python";
+  tech: "ruby" | "javascript" | "python" | "nodejs" | "express" | "java" | "IF";
   children: React.ReactNode;
 }
 
@@ -22,6 +26,14 @@ const TechTooltip: React.FC<TechTooltipProps> = ({ tech, children }) => {
         return <JavaScriptIcon />;
       case "python":
         return <PythonIcon />;
+      case "nodejs":
+        return <NodeJSIcon />;
+      case "java":
+        return <JavaIcon />;
+      case "express":
+        return <ExpressIcon />;
+      case "IF":
+        return <InstitutoFederalIcon />;
       default:
         return null;
     }

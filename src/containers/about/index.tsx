@@ -3,6 +3,7 @@ import { Title, Section } from "../../common/components/index";
 import styles from "./About.module.css";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import TechTooltip from "../../common/components/TechTooltip";
 
 const About: React.FC = () => {
   const controls = useAnimation();
@@ -71,17 +72,29 @@ const About: React.FC = () => {
             <motion.p variants={itemVariants}>
               Graduando em <strong>Sistemas de Informação pela UFPI</strong>,
               com formação técnica em Informática pelo{" "}
-              <strong>IF SertãoPE</strong>. Gosto de transformar ideias em
-              projetos reais através da programação.
+              <TechTooltip tech="IF">
+                <span className={styles.techHighlight}>IF SertãoPE</span>
+              </TechTooltip>
+              . Gosto de transformar ideias em projetos reais através da
+              programação.
             </motion.p>
 
             <motion.p variants={itemVariants}>
               Minha jornada começou em 2021 durante o curso técnico, onde
-              desenvolvi projetos em <strong>Java</strong> e tive a oportunidade
-              de atuar como desenvolvedor web institucional entre 2023 e 2024.
-              Recentemente, participei como voluntário no projeto da ENAMO 2024,
-              aplicando tecnologias como <strong>Node.js</strong> e{" "}
-              <strong>Express</strong>.
+              desenvolvi projetos em{" "}
+              <TechTooltip tech="java">
+                <span className={styles.techHighlight}>Java</span>
+              </TechTooltip>{" "}
+              e tive a oportunidade de atuar como desenvolvedor web
+              institucional entre 2023 e 2024. Recentemente, participei como
+              voluntário no projeto da ENAMO 2024, aplicando tecnologias como{" "}
+              <TechTooltip tech="nodejs">
+                <span className={styles.techHighlight}>Node.js</span>
+              </TechTooltip>{" "}
+              e{" "}
+              <TechTooltip tech="express">
+                <span className={styles.techHighlight}>Express</span>
+              </TechTooltip>
             </motion.p>
           </motion.div>
 
